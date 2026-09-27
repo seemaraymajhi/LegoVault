@@ -1,8 +1,6 @@
 package be.kdg.legoproject;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class LegoSet {
     private final String name;
@@ -13,10 +11,9 @@ public class LegoSet {
     private final boolean retired;
     private final String imageUrl;
     private Theme theme;
-    private final List<LegoPiece> legoPieces = new ArrayList<>();
 
     public LegoSet(String name, int pieceCount, double price, LocalDate releaseDate,
-                    Difficulty difficulty, boolean retired, String imageUrl) {
+                   Difficulty difficulty, boolean retired, String imageUrl) {
         this.name = name;
         this.pieceCount = pieceCount;
         this.price = price;
@@ -58,26 +55,13 @@ public class LegoSet {
         return theme;
     }
 
-    // called from Theme.addLegoSet - keeps the one-to-many relationship in sync
     void setTheme(Theme theme) {
         this.theme = theme;
     }
 
-    public List<LegoPiece> getLegoPieces() {
-        return legoPieces;
-    }
-
-    // many-to-many: keeps both sides in sync, guarded against infinite recursion
-    public void addLegoPiece(LegoPiece legoPiece) {
-        if (!legoPieces.contains(legoPiece)) {
-            legoPieces.add(legoPiece);
-            legoPiece.addLegoSet(this);
-        }
-    }
-
     @Override
     public String toString() {
-        return name + " [" + pieceCount + " pcs, EUR " + price + ", " + difficulty
-                + (retired ? ", RETIRED" : "") + "]";
+        return name + " [" + pieceCount + " pieces, EUR " + price + ", "
+                + difficulty + (retired ? ", retired" : "") + "]";
     }
 }

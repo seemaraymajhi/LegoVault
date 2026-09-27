@@ -7,6 +7,7 @@ public class Theme {
     private final String name;
     private final String ageRange;
     private final String description;
+
     private final List<LegoSet> legoSets = new ArrayList<>();
 
     public Theme(String name, String ageRange, String description) {
@@ -32,8 +33,10 @@ public class Theme {
     }
 
     public void addLegoSet(LegoSet legoSet) {
-        legoSets.add(legoSet);
-        legoSet.setTheme(this);
+        if (!legoSets.contains(legoSet)) {
+            legoSets.add(legoSet);
+            legoSet.setTheme(this);
+        }
     }
 
     @Override
