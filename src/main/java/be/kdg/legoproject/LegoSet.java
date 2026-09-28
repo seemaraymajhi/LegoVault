@@ -1,6 +1,8 @@
 package be.kdg.legoproject;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LegoSet {
     private final String name;
@@ -11,6 +13,7 @@ public class LegoSet {
     private final boolean retired;
     private final String imageUrl;
     private Theme theme;
+    private final List<LegoPiece> legoPieces = new ArrayList<>();
 
     public LegoSet(String name, int pieceCount, double price, LocalDate releaseDate,
                    Difficulty difficulty, boolean retired, String imageUrl) {
@@ -57,6 +60,17 @@ public class LegoSet {
 
     void setTheme(Theme theme) {
         this.theme = theme;
+    }
+
+    public List<LegoPiece> getLegoPieces() {
+        return legoPieces;
+    }
+
+    public void addLegoPiece(LegoPiece legoPiece) {
+        if (!legoPieces.contains(legoPiece)) {
+            legoPieces.add(legoPiece);
+            legoPiece.addLegoSet(this);
+        }
     }
 
     @Override
