@@ -1,4 +1,4 @@
-package be.kdg.legoproject;
+package be.kdg.legoproject.domain;
 
 import java.util.ArrayList;
 import java.util.List;
