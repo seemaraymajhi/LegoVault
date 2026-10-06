@@ -4,13 +4,9 @@ import be.kdg.legoproject.domain.LegoSet;
 
 import java.util.List;
 
-public class LegoSetRepository {
+public interface LegoSetRepository {
 
-    public List<LegoSet> getAll() {
-        return DataFactory.legoSets;
-    }
+    List<LegoSet> getAll();
 
-    public void add(LegoSet legoSet) {
-        DataFactory.legoSets.add(legoSet);
-    }
+    void add(LegoSet legoSet);
 }
