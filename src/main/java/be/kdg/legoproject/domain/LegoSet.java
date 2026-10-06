@@ -1,4 +1,4 @@
-package be.kdg.legoproject;
+package be.kdg.legoproject.domain;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
