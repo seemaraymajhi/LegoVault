@@ -3,6 +3,7 @@ package be.kdg.legoproject.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+// DOMAIN: plain data class with no Spring or console code.
 public class Theme {
     private final String name;
     private final String ageRange;
@@ -33,6 +34,7 @@ public class Theme {
     }
 
     public void addLegoSet(LegoSet legoSet) {
+        // Maintain both sides: Theme knows its sets and each set knows its Theme.
         if (!legoSets.contains(legoSet)) {
             legoSets.add(legoSet);
             legoSet.setTheme(this);

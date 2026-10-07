@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Scanner;
 
+// PRESENTATION LAYER (View): handles console input/output
+// and starts the Presenter through CommandLineRunner.
 @Component
 public class View implements CommandLineRunner {
 
@@ -18,11 +20,14 @@ public class View implements CommandLineRunner {
     private final Presenter presenter;
 
     public View(LegoSetService legoSetService, LegoPieceService legoPieceService) {
+        // Spring supplies both services here. The View then gives them to the
+        // Presenter, which controls what should happen after user input.
         this.presenter = new Presenter(this, legoSetService, legoPieceService);
     }
 
     @Override
     public void run(String... args) {
+        // CommandLineRunner.run is called automatically after Spring starts.
         presenter.start();
     }
 
@@ -39,6 +44,7 @@ public class View implements CommandLineRunner {
     }
 
     public String readInput() {
+        // nextLine reads the complete line and returns it to the Presenter.
         return scanner.nextLine();
     }
 
@@ -51,10 +57,12 @@ public class View implements CommandLineRunner {
     }
 
     public void showLegoSets(List<LegoSet> legoSets) {
+        // println automatically calls toString() on every LegoSet.
         legoSets.forEach(System.out::println);
     }
 
     public void showLegoPieces(List<LegoPiece> legoPieces) {
+        // println automatically calls toString() on every LegoPiece.
         legoPieces.forEach(System.out::println);
     }
 }

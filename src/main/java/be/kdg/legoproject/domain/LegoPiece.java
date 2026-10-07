@@ -3,6 +3,7 @@ package be.kdg.legoproject.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+// DOMAIN: plain data class with no Spring or console code.
 public class LegoPiece {
     private final String name;
     private final String color;
@@ -32,6 +33,8 @@ public class LegoPiece {
     }
 
     public void addLegoSet(LegoSet legoSet) {
+        // Update both sides of the many-to-many relationship. contains()
+        // prevents the two add methods from calling each other forever.
         if (!legoSets.contains(legoSet)) {
             legoSets.add(legoSet);
             legoSet.addLegoPiece(this);

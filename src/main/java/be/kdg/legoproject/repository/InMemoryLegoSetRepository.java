@@ -5,11 +5,14 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+// DATA ACCESS LAYER: in-memory implementation that reads the lists
+// filled by DataFactory.
 @Repository
 public class InMemoryLegoSetRepository implements LegoSetRepository {
 
     @Override
     public List<LegoSet> getAll() {
+        // This repository uses the seeded in-memory list instead of a database.
         return DataFactory.legoSets;
     }
 

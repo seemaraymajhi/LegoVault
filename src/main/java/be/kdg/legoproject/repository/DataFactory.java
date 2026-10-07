@@ -8,9 +8,12 @@ import java.util.List;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
+// DATA ACCESS LAYER: creates and links the sample data once at startup.
 @Component
 public class DataFactory {
 
+    // These lists act as the application's temporary in-memory data store.
+    // Their contents disappear when the application stops.
     public static final List<LegoSet> legoSets = new ArrayList<>();
     public static final List<LegoPiece> legoPieces = new ArrayList<>();
     public static final List<Theme> themes = new ArrayList<>();
@@ -18,15 +21,18 @@ public class DataFactory {
 
     @PostConstruct
     public void init() {
+        // Spring calls this once after creating the DataFactory component.
         seed();
     }
 
 
     public static void seed() {
+        // Clear first so calling seed more than once never duplicates the data.
         legoSets.clear();
         legoPieces.clear();
         themes.clear();
 
+        // 1. Create the themes.
         Theme starWars = new Theme(
                 "Star Wars", "9+", "Sets based on the Star Wars universe");
 
@@ -58,6 +64,7 @@ public class DataFactory {
                 "Ideas", "18+", "Fan-designed LEGO sets selected for production");
 
 
+        // 2. Create the LEGO sets.
         LegoSet millenniumFalcon = new LegoSet(
                 "Millennium Falcon", 7541, 849.99,
                 LocalDate.of(2017, 10, 1),
@@ -128,6 +135,8 @@ public class DataFactory {
                 "https://images.brickset.com/sets/images/21319-1.jpg"
         );
 
+        // 3. Connect every set to its theme. addLegoSet also updates the
+        // set's theme field, keeping both sides of the relationship in sync.
         starWars.addLegoSet(millenniumFalcon);
         starWars.addLegoSet(xWing);
         city.addLegoSet(policeStation);
@@ -140,6 +149,7 @@ public class DataFactory {
         ninjago.addLegoSet(ninjaDojo);
         ideas.addLegoSet(centralPerk);
 
+        // 4. Create reusable LEGO piece types.
         LegoPiece brick = new LegoPiece(
                 "2x4 Brick", "Red", Material.PLASTIC
         );
@@ -176,6 +186,7 @@ public class DataFactory {
                 "Rubber Band", "Black", Material.RUBBER
         );
 
+        // 5. Connect pieces and sets. Each add also updates the reverse side.
         millenniumFalcon.addLegoPiece(plate);
         millenniumFalcon.addLegoPiece(pin);
 
@@ -204,6 +215,7 @@ public class DataFactory {
         ninjaDojo.addLegoPiece(rubberBand);
 
 
+        // 6. Store all created objects so repositories can retrieve them.
         legoSets.addAll(List.of(
                 millenniumFalcon,
                 policeStation,
