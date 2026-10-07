@@ -6,11 +6,14 @@ import be.kdg.legoproject.presentation.Presenter;
 import be.kdg.legoproject.repository.DataFactory;
 import be.kdg.legoproject.service.LegoPieceService;
 import be.kdg.legoproject.service.LegoSetService;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class View {
+@Component
+public class View implements CommandLineRunner {
 
     private final Scanner scanner = new Scanner(System.in);
     private final Presenter presenter;
@@ -19,7 +22,8 @@ public class View {
         this.presenter = new Presenter(this, legoSetService, legoPieceService);
     }
 
-    public void show() {
+    @Override
+    public void run(String... args) {
         DataFactory.seed();
         presenter.start();
     }

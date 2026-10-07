@@ -1,9 +1,11 @@
 package be.kdg.legoproject.repository;
 
 import be.kdg.legoproject.domain.LegoPiece;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class InMemoryLegoPieceRepository implements LegoPieceRepository {
 
     @Override
