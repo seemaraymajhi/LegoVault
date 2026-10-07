@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ConsoleApp {
 
     public static void main(String[] args) {
+        // Starts Spring, which creates and connects the View, services,
+        // repositories and DataFactory based on their annotations.
         SpringApplication.run(ConsoleApp.class, args);
     }
 }

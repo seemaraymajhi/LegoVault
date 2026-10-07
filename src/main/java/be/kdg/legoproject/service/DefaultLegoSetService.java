@@ -6,12 +6,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// BUSINESS LAYER: applies LEGO set filtering and business rules,
+// using the repository to retrieve the data.
+
 @Service
 public class DefaultLegoSetService implements LegoSetService {
 
     private final LegoSetRepository legoSetRepository;
 
     public DefaultLegoSetService(LegoSetRepository legoSetRepository) {
+        // Spring injects the repository implementation marked with @Repository.
         this.legoSetRepository = legoSetRepository;
     }
 
@@ -22,6 +26,7 @@ public class DefaultLegoSetService implements LegoSetService {
 
     @Override
     public List<LegoSet> getLegoSetsWithMinimumPieces(int minimumPieces) {
+        // Stream through all sets, keep matching sets, and collect a new list.
         return legoSetRepository.getAll()
                 .stream()
                 .filter(legoSet -> legoSet.getPieceCount() >= minimumPieces)
