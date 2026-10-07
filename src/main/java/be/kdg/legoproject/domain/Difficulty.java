@@ -1,4 +1,4 @@
-package be.kdg.legoproject;
+package be.kdg.legoproject.domain;
 
 public enum Difficulty {
     EASY,

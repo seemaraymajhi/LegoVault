@@ -1,9 +1,10 @@
-package be.kdg.legoproject;
+package be.kdg.legoproject.domain;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+// DOMAIN: plain data class with no Spring or console code.
 public class LegoSet {
     private final String name;
     private final int pieceCount;
@@ -59,6 +60,7 @@ public class LegoSet {
     }
 
     void setTheme(Theme theme) {
+        // Package-private: Theme.addLegoSet controls this relationship.
         this.theme = theme;
     }
 
@@ -67,6 +69,8 @@ public class LegoSet {
     }
 
     public void addLegoPiece(LegoPiece legoPiece) {
+        // Update both sides of the many-to-many relationship. contains()
+        // prevents the two add methods from calling each other forever.
         if (!legoPieces.contains(legoPiece)) {
             legoPieces.add(legoPiece);
             legoPiece.addLegoSet(this);

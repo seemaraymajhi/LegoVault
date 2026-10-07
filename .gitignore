@@ -4,5 +4,4 @@ build/
 *.iml
 out/
 .DS_Store
-.mcp.json
-.ai/
+

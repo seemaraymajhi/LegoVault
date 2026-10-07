@@ -1,5 +1,8 @@
 # LegoVault
 
+See [WEEKLY.md](WEEKLY.md) for the weekly requirements and progress.
+
+
 ## Theme
 - name - String
 - ageRange - String
