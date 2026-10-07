@@ -1,91 +1,58 @@
 package be.kdg.legoproject.view;
 
+import be.kdg.legoproject.domain.LegoPiece;
+import be.kdg.legoproject.domain.LegoSet;
+import be.kdg.legoproject.presentation.Presenter;
 import be.kdg.legoproject.repository.DataFactory;
 import be.kdg.legoproject.service.LegoPieceService;
 import be.kdg.legoproject.service.LegoSetService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class View {
 
-    private final LegoSetService legoSetService;
-    private final LegoPieceService legoPieceService;
     private final Scanner scanner = new Scanner(System.in);
-
+    private final Presenter presenter;
 
     public View(LegoSetService legoSetService, LegoPieceService legoPieceService) {
-        this.legoSetService = legoSetService;
-        this.legoPieceService = legoPieceService;
+        this.presenter = new Presenter(this, legoSetService, legoPieceService);
     }
 
     public void show() {
         DataFactory.seed();
-
-        int choice;
-
-        do {
-            System.out.println();
-            System.out.println("What would you like to do?");
-            System.out.println("==========================");
-            System.out.println("0) Quit");
-            System.out.println("1) Show all LEGO sets");
-            System.out.println("2) Show LEGO sets with at least X pieces");
-            System.out.println("3) Show all LEGO pieces");
-            System.out.println("4) Show LEGO pieces by name and/or material");
-            System.out.print("Choice (0-4): ");
-
-            choice = Integer.parseInt(scanner.nextLine());
-
-            switch (choice) {
-                case 1 -> showAllLegoSets();
-                case 2 -> filterLegoSets();
-                case 3 -> showAllLegoPieces();
-                case 4 -> filterLegoPieces();
-                case 0 -> System.out.println("Goodbye!");
-                default -> System.out.println("Invalid choice.");
-            }
-
-        } while (choice != 0);
+        presenter.start();
     }
 
-    private void showAllLegoSets() {
+    public void showMenu() {
         System.out.println();
-        System.out.println("All LEGO sets");
-        System.out.println("=============");
-
-        legoSetService.getAllLegoSets()
-                .forEach(System.out::println);
+        System.out.println("What would you like to do?");
+        System.out.println("==========================");
+        System.out.println("0) Quit");
+        System.out.println("1) Show all LEGO sets");
+        System.out.println("2) Show LEGO sets with at least X pieces");
+        System.out.println("3) Show all LEGO pieces");
+        System.out.println("4) Show LEGO pieces by name and/or material");
+        System.out.print("Choice (0-4): ");
     }
 
-    private void filterLegoSets() {
-        System.out.println();
-        System.out.print("Minimum number of pieces: ");
-
-        int minimumPieces = Integer.parseInt(scanner.nextLine());
-
-        legoSetService.getLegoSetsWithMinimumPieces(minimumPieces)
-                .forEach(System.out::println);
+    public String readInput() {
+        return scanner.nextLine();
     }
 
-    private void showAllLegoPieces() {
-        System.out.println();
-        System.out.println("All LEGO pieces");
-        System.out.println("===============");
-
-        legoPieceService.getAllLegoPieces()
-                .forEach(System.out::println);
+    public void prompt(String message) {
+        System.out.print(message);
     }
 
-    private void filterLegoPieces() {
-        System.out.println();
-        System.out.print("Enter part of a name or leave blank: ");
-        String name = scanner.nextLine();
+    public void showMessage(String message) {
+        System.out.println(message);
+    }
 
-        System.out.print(
-                "Enter a material (PLASTIC, RUBBER or METAL) or leave blank: ");
-        String material = scanner.nextLine();
+    public void showLegoSets(List<LegoSet> legoSets) {
+        legoSets.forEach(System.out::println);
+    }
 
-        legoPieceService.searchLegoPieces(name, material)
-                .forEach(System.out::println);
+    public void showLegoPieces(List<LegoPiece> legoPieces) {
+        legoPieces.forEach(System.out::println);
     }
 }
