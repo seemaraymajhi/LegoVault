@@ -1,15 +1,17 @@
 package be.kdg.legoproject.service;
 
 import be.kdg.legoproject.domain.LegoPiece;
-import be.kdg.legoproject.repository.InMemoryLegoPieceRepository;
 import be.kdg.legoproject.repository.LegoPieceRepository;
 
 import java.util.List;
 
 public class DefaultLegoPieceService implements LegoPieceService {
 
-    private final LegoPieceRepository legoPieceRepository =
-            new InMemoryLegoPieceRepository();
+    private final LegoPieceRepository legoPieceRepository;
+
+    public DefaultLegoPieceService(LegoPieceRepository legoPieceRepository) {
+        this.legoPieceRepository = legoPieceRepository;
+    }
 
     @Override
     public List<LegoPiece> getAllLegoPieces() {

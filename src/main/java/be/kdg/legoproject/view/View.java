@@ -1,8 +1,6 @@
 package be.kdg.legoproject.view;
 
 import be.kdg.legoproject.repository.DataFactory;
-import be.kdg.legoproject.service.DefaultLegoPieceService;
-import be.kdg.legoproject.service.DefaultLegoSetService;
 import be.kdg.legoproject.service.LegoPieceService;
 import be.kdg.legoproject.service.LegoSetService;
 
@@ -10,12 +8,15 @@ import java.util.Scanner;
 
 public class View {
 
-    private final LegoSetService legoSetService =
-            new DefaultLegoSetService();
-
-    private final LegoPieceService legoPieceService =
-            new DefaultLegoPieceService();
+    private final LegoSetService legoSetService;
+    private final LegoPieceService legoPieceService;
     private final Scanner scanner = new Scanner(System.in);
+
+
+    public View(LegoSetService legoSetService, LegoPieceService legoPieceService) {
+        this.legoSetService = legoSetService;
+        this.legoPieceService = legoPieceService;
+    }
 
     public void show() {
         DataFactory.seed();
