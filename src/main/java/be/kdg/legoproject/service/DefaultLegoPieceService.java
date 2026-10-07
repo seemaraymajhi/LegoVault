@@ -2,9 +2,11 @@ package be.kdg.legoproject.service;
 
 import be.kdg.legoproject.domain.LegoPiece;
 import be.kdg.legoproject.repository.LegoPieceRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class DefaultLegoPieceService implements LegoPieceService {
 
     private final LegoPieceRepository legoPieceRepository;
