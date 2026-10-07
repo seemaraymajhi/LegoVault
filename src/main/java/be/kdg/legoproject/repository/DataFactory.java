@@ -5,15 +5,21 @@ import be.kdg.legoproject.domain.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.annotation.PostConstruct;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DataFactory {
 
     public static final List<LegoSet> legoSets = new ArrayList<>();
     public static final List<LegoPiece> legoPieces = new ArrayList<>();
 
-    private DataFactory() {
-        // Utility class
+
+    @PostConstruct
+    public void init() {
+        seed();
     }
+
 
     public static void seed() {
         legoSets.clear();
