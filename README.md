@@ -14,7 +14,7 @@ Relationships:
 - **Theme → LegoSet**: one-to-many (a theme has many sets, each set belongs to one theme)
 - **LegoSet ↔ LegoPiece**: many-to-many (a set contains many pieces, a piece can appear in many sets)
 
-See [data.md](DATA.md) for example data.
+See [DATA.md](DATA.md) for example data.
 
 ## Features
 
@@ -27,7 +27,7 @@ The console menu offers:
 
 ## Requirements
 
-- Java 21 (Gradle's toolchain setting takes care of selecting it)
+- Java 25 (Gradle's toolchain setting takes care of selecting it)
 
 
 
