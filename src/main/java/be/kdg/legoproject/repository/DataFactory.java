@@ -13,6 +13,7 @@ public class DataFactory {
 
     public static final List<LegoSet> legoSets = new ArrayList<>();
     public static final List<LegoPiece> legoPieces = new ArrayList<>();
+    public static final List<Theme> themes = new ArrayList<>();
 
 
     @PostConstruct
@@ -24,6 +25,7 @@ public class DataFactory {
     public static void seed() {
         legoSets.clear();
         legoPieces.clear();
+        themes.clear();
 
         Theme starWars = new Theme(
                 "Star Wars", "9+", "Sets based on the Star Wars universe");
@@ -33,6 +35,27 @@ public class DataFactory {
 
         Theme city = new Theme(
                 "City", "5+", "Vehicles and buildings inspired by everyday life");
+
+        Theme speedChampions = new Theme(
+                "Speed Champions", "9+", "Detailed LEGO models of famous cars");
+
+        Theme creatorExpert = new Theme(
+                "Creator Expert", "18+", "Advanced display models for experienced builders");
+
+        Theme architecture = new Theme(
+                "Architecture", "13+", "Models of famous buildings and landmarks");
+
+        Theme friends = new Theme(
+                "Friends", "6+", "Sets focused on Heartlake City and its characters");
+
+        Theme ninjago = new Theme(
+                "Ninjago", "7+", "Action sets based on the Ninjago universe");
+
+        Theme harryPotter = new Theme(
+                "Harry Potter", "9+", "Sets based on the Harry Potter world");
+
+        Theme ideas = new Theme(
+                "Ideas", "18+", "Fan-designed LEGO sets selected for production");
 
 
         LegoSet millenniumFalcon = new LegoSet(
@@ -70,11 +93,52 @@ public class DataFactory {
                 "https://images.brickset.com/sets/images/60320-1.jpg"
         );
 
+        LegoSet ferrari = new LegoSet(
+                "Ferrari 812 Competizione", 261, 24.99,
+                LocalDate.of(2023, 3, 1),
+                Difficulty.EASY, false,
+                "https://images.brickset.com/sets/images/76914-1.jpg"
+        );
+
+        LegoSet eiffelTower = new LegoSet(
+                "Eiffel Tower", 10001, 629.99,
+                LocalDate.of(2022, 11, 25),
+                Difficulty.EXPERT, false,
+                "https://images.brickset.com/sets/images/10307-1.jpg"
+        );
+
+        LegoSet hogwartsCastle = new LegoSet(
+                "Hogwarts Castle", 6020, 469.99,
+                LocalDate.of(2018, 9, 1),
+                Difficulty.EXPERT, true,
+                "https://images.brickset.com/sets/images/71043-1.jpg"
+        );
+
+        LegoSet ninjaDojo = new LegoSet(
+                "Ninja Dojo Temple", 1394, 99.99,
+                LocalDate.of(2022, 1, 1),
+                Difficulty.HARD, false,
+                "https://images.brickset.com/sets/images/71767-1.jpg"
+        );
+
+        LegoSet centralPerk = new LegoSet(
+                "Central Perk", 1070, 69.99,
+                LocalDate.of(2019, 9, 1),
+                Difficulty.MEDIUM, true,
+                "https://images.brickset.com/sets/images/21319-1.jpg"
+        );
+
         starWars.addLegoSet(millenniumFalcon);
         starWars.addLegoSet(xWing);
         city.addLegoSet(policeStation);
         city.addLegoSet(fireStation);
         technic.addLegoSet(bugattiChiron);
+
+        speedChampions.addLegoSet(ferrari);
+        creatorExpert.addLegoSet(eiffelTower);
+        harryPotter.addLegoSet(hogwartsCastle);
+        ninjago.addLegoSet(ninjaDojo);
+        ideas.addLegoSet(centralPerk);
 
         LegoPiece brick = new LegoPiece(
                 "2x4 Brick", "Red", Material.PLASTIC
@@ -90,6 +154,26 @@ public class DataFactory {
         );
         LegoPiece panel = new LegoPiece(
                 "Plant Leaf", "Green", Material.PLASTIC
+        );
+
+        LegoPiece windshield = new LegoPiece(
+                "Car Windshield", "Transparent", Material.PLASTIC
+        );
+
+        LegoPiece axle = new LegoPiece(
+                "Technic Axle", "Grey", Material.PLASTIC
+        );
+
+        LegoPiece wheelRim = new LegoPiece(
+                "Wheel Rim", "Silver", Material.PLASTIC
+        );
+
+        LegoPiece chain = new LegoPiece(
+                "Small Chain", "Dark Grey", Material.METAL
+        );
+
+        LegoPiece rubberBand = new LegoPiece(
+                "Rubber Band", "Black", Material.RUBBER
         );
 
         millenniumFalcon.addLegoPiece(plate);
@@ -108,12 +192,29 @@ public class DataFactory {
         bugattiChiron.addLegoPiece(pin);
         bugattiChiron.addLegoPiece(tyre);
 
+        ferrari.addLegoPiece(windshield);
+
+        eiffelTower.addLegoPiece(chain);
+
+        hogwartsCastle.addLegoPiece(brick);
+        hogwartsCastle.addLegoPiece(panel);
+
+        ninjaDojo.addLegoPiece(axle);
+        ninjaDojo.addLegoPiece(chain);
+        ninjaDojo.addLegoPiece(rubberBand);
+
+
         legoSets.addAll(List.of(
                 millenniumFalcon,
                 policeStation,
                 bugattiChiron,
                 xWing,
-                fireStation
+                fireStation,
+                ferrari,
+                eiffelTower,
+                hogwartsCastle,
+                ninjaDojo,
+                centralPerk
         ));
 
         legoPieces.addAll(List.of(
@@ -121,7 +222,25 @@ public class DataFactory {
                 plate,
                 pin,
                 tyre,
-                panel
+                panel,
+                windshield,
+                axle,
+                wheelRim,
+                chain,
+                rubberBand
+        ));
+
+        themes.addAll(List.of(
+                starWars,
+                technic,
+                city,
+                speedChampions,
+                creatorExpert,
+                architecture,
+                friends,
+                ninjago,
+                harryPotter,
+                ideas
         ));
     }
 }
