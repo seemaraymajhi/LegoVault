@@ -47,7 +47,10 @@ public class Presenter implements CommandLineRunner {
     }
 
     private void showAllLegoSets() {
-        view.showLegoSets(legoSetService.getAllLegoSets());
+        view.showLegoSets(
+                "All LEGO sets",
+                legoSetService.getAllLegoSets()
+        );
     }
 
     private void filterLegoSets() {
@@ -63,12 +66,16 @@ public class Presenter implements CommandLineRunner {
         } while (minimumPieces < 0);
 
         view.showLegoSets(
+                "LEGO sets with at least " + minimumPieces + " pieces",
                 legoSetService.getLegoSetsWithMinimumPieces(minimumPieces)
         );
     }
 
     private void showAllLegoPieces() {
-        view.showLegoPieces(legoPieceService.getAllLegoPieces());
+        view.showLegoPieces(
+                "All LEGO pieces",
+                legoPieceService.getAllLegoPieces()
+        );
     }
 
     private void filterLegoPieces() {
@@ -81,6 +88,7 @@ public class Presenter implements CommandLineRunner {
         String material = view.readInput();
 
         view.showLegoPieces(
+                "Matching LEGO pieces",
                 legoPieceService.searchLegoPieces(name, material)
         );
     }

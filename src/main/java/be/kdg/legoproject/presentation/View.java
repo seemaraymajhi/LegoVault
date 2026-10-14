@@ -47,11 +47,32 @@ public class View {
         System.out.println(message);
     }
 
-    public void showLegoSets(List<LegoSet> legoSets) {
+    public void showLegoSets(String title, List<LegoSet> legoSets) {
+        showTitle(title);
+
+        if (legoSets.isEmpty()) {
+            showMessage("No LEGO sets found.");
+            return;
+        }
+
         legoSets.forEach(System.out::println);
     }
 
-    public void showLegoPieces(List<LegoPiece> legoPieces) {
+    public void showLegoPieces(String title, List<LegoPiece> legoPieces) {
+        showTitle(title);
+
+        if (legoPieces.isEmpty()) {
+            showMessage("No LEGO pieces found.");
+            return;
+        }
+
         legoPieces.forEach(System.out::println);
+    }
+
+
+    private void showTitle(String title) {
+        System.out.println();
+        System.out.println(title);
+        System.out.println("=".repeat(title.length()));
     }
 }
