@@ -1,35 +1,17 @@
-package be.kdg.legoproject.view;
+package be.kdg.legoproject.presentation;
 
 import be.kdg.legoproject.domain.LegoPiece;
 import be.kdg.legoproject.domain.LegoSet;
-import be.kdg.legoproject.presentation.Presenter;
-import be.kdg.legoproject.service.LegoPieceService;
-import be.kdg.legoproject.service.LegoSetService;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Scanner;
 
-// PRESENTATION LAYER (View): handles console input/output
-// and starts the Presenter through CommandLineRunner.
+// Handles console input and output only.
 @Component
-public class View implements CommandLineRunner {
+public class View {
 
     private final Scanner scanner = new Scanner(System.in);
-    private final Presenter presenter;
-
-    public View(LegoSetService legoSetService, LegoPieceService legoPieceService) {
-        // Spring supplies both services here. The View then gives them to the
-        // Presenter, which controls what should happen after user input.
-        this.presenter = new Presenter(this, legoSetService, legoPieceService);
-    }
-
-    @Override
-    public void run(String... args) {
-        // CommandLineRunner.run is called automatically after Spring starts.
-        presenter.start();
-    }
 
     public void showMenu() {
         System.out.println();
@@ -44,8 +26,17 @@ public class View implements CommandLineRunner {
     }
 
     public String readInput() {
-        // nextLine reads the complete line and returns it to the Presenter.
-        return scanner.nextLine();
+        return scanner.nextLine().trim();
+    }
+
+    public int readNumber() {
+        while (true) {
+            try {
+                return Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException exception) {
+                System.out.print("Please enter a valid number: ");
+            }
+        }
     }
 
     public void prompt(String message) {
@@ -57,12 +48,10 @@ public class View implements CommandLineRunner {
     }
 
     public void showLegoSets(List<LegoSet> legoSets) {
-        // println automatically calls toString() on every LegoSet.
         legoSets.forEach(System.out::println);
     }
 
     public void showLegoPieces(List<LegoPiece> legoPieces) {
-        // println automatically calls toString() on every LegoPiece.
         legoPieces.forEach(System.out::println);
     }
 }
