@@ -2,7 +2,6 @@ package be.kdg.legoproject.presentation;
 
 import be.kdg.legoproject.service.LegoPieceService;
 import be.kdg.legoproject.service.LegoSetService;
-import be.kdg.legoproject.view.View;
 
 // PRESENTATION LAYER (Presenter): contains the menu logic, asks the services
 // for data and tells the View what to show.

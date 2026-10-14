@@ -1,8 +1,7 @@
-package be.kdg.legoproject.view;
+package be.kdg.legoproject.presentation;
 
 import be.kdg.legoproject.domain.LegoPiece;
 import be.kdg.legoproject.domain.LegoSet;
-import be.kdg.legoproject.presentation.Presenter;
 import be.kdg.legoproject.service.LegoPieceService;
 import be.kdg.legoproject.service.LegoSetService;
 import org.springframework.boot.CommandLineRunner;
