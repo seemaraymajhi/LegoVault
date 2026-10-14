@@ -2,10 +2,12 @@ package be.kdg.legoproject.presentation;
 
 import be.kdg.legoproject.service.LegoPieceService;
 import be.kdg.legoproject.service.LegoSetService;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
-// PRESENTATION LAYER (Presenter): contains the menu logic, asks the services
-// for data and tells the View what to show.
-public class Presenter {
+// Coordinates the View and business services.
+@Component
+public class Presenter implements CommandLineRunner {
 
     private final View view;
     private final LegoSetService legoSetService;
@@ -14,22 +16,25 @@ public class Presenter {
     public Presenter(
             View view,
             LegoSetService legoSetService,
-            LegoPieceService legoPieceService) {
-
+            LegoPieceService legoPieceService
+    ) {
         this.view = view;
         this.legoSetService = legoSetService;
         this.legoPieceService = legoPieceService;
     }
 
-    public void start() {
+    @Override
+    public void run(String... args) {
+        start();
+    }
+
+    private void start() {
         int choice;
 
-        // Keep showing the menu until the user chooses 0.
         do {
             view.showMenu();
-            choice = Integer.parseInt(view.readInput());
+            choice = view.readNumber();
 
-            // The Presenter translates a menu choice into a specific action.
             switch (choice) {
                 case 1 -> showAllLegoSets();
                 case 2 -> filterLegoSets();
@@ -38,20 +43,24 @@ public class Presenter {
                 case 0 -> view.showMessage("Goodbye!");
                 default -> view.showMessage("Invalid choice.");
             }
-
         } while (choice != 0);
     }
 
     private void showAllLegoSets() {
-        // Ask the service for data, then pass the result to the View for output.
         view.showLegoSets(legoSetService.getAllLegoSets());
     }
 
     private void filterLegoSets() {
-        view.prompt("Minimum number of pieces: ");
+        int minimumPieces;
 
-        // Console input is text, so it must be converted before filtering.
-        int minimumPieces = Integer.parseInt(view.readInput());
+        do {
+            view.prompt("Minimum number of pieces: ");
+            minimumPieces = view.readNumber();
+
+            if (minimumPieces < 0) {
+                view.showMessage("Please enter zero or a positive number.");
+            }
+        } while (minimumPieces < 0);
 
         view.showLegoSets(
                 legoSetService.getLegoSetsWithMinimumPieces(minimumPieces)
@@ -71,7 +80,6 @@ public class Presenter {
         );
         String material = view.readInput();
 
-        // Blank values are allowed; the service decides which filters to apply.
         view.showLegoPieces(
                 legoPieceService.searchLegoPieces(name, material)
         );
