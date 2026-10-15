@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LegoVault - LEGO Sets</title>
+
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 6px;
+        }
+
+        img {
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body>
+<nav aria-label="Main navigation">
+    <a th:href="@{/legosets}">LEGO Sets</a>
+    <a th:href="@{/legopieces}">LEGO Pieces</a>
+    <a th:href="@{/legosets/add}">Add LEGO Set</a>
+    <a th:href="@{/legopieces/add}">Add LEGO Piece</a>
+</nav>
+
+<main>
+    <h1>LEGO Sets</h1>
+
+    <form th:action="@{/legosets/search}" method="get">
+        <label for="minPieces">
+            Minimum number of pieces:
+        </label>
+
+        <input id="minPieces"
+               type="number"
+               name="minPieces"
+               min="0"
+               step="1"
+               required
+               th:value="${minPieces}">
+
+        <button type="submit">Filter</button>
+        <a th:href="@{/legosets}">Clear</a>
+    </form>
+
+    <p th:if="${#lists.isEmpty(legoSets)}">
+        No LEGO sets found.
+    </p>
+
+    <table th:unless="${#lists.isEmpty(legoSets)}">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Pieces</th>
+            <th>Price (EUR)</th>
+            <th>Release date</th>
+            <th>Difficulty</th>
+            <th>Retired</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="set : ${legoSets}">
+            <td>
+                <img th:src="${set.imageUrl}"
+                     th:alt="${set.name}"
+                     width="100"
+                     height="100">
+            </td>
+
+            <td th:text="${set.name}">
+                Name
+            </td>
+
+            <td th:text="${set.pieceCount}">
+                0
+            </td>
+
+            <td th:text="${#numbers.formatDecimal(set.price, 1, 2)}">
+                0.00
+            </td>
+
+            <td th:text="${set.releaseDate}">
+                2020-01-01
+            </td>
+
+            <td th:text="${set.difficulty}">
+                EASY
+            </td>
+
+            <td th:text="${set.retired ? 'Yes' : 'No'}">
+                No
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
