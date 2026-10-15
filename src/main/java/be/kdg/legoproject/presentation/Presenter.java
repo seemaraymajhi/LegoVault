@@ -4,6 +4,8 @@ import be.kdg.legoproject.service.LegoPieceService;
 import be.kdg.legoproject.service.LegoSetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import java.util.Arrays;
+
 
 // Coordinates the View and business services.
 @Component
@@ -25,7 +27,13 @@ public class Presenter implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        start();
+        boolean consoleMode = Arrays.stream(args)
+                .anyMatch("--console"::equalsIgnoreCase);
+
+
+        if (consoleMode) {
+            start();
+        }
     }
 
     private void start() {
