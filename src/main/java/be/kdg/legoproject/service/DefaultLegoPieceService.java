@@ -44,4 +44,12 @@ public class DefaultLegoPieceService implements LegoPieceService {
                                 .equalsIgnoreCase(material))
                 .toList();
     }
+
+    // Stores a new LEGO piece through the repository.
+    // The service doesn't save anything itself;
+    // it passes the piece to the data layer.
+    @Override
+    public void addLegoPiece(LegoPiece legoPiece) {
+        legoPieceRepository.add(legoPiece);
+    }
 }
