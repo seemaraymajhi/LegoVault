@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>LegoVault - LEGO Pieces</title>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 60rem;
+      margin: 2rem auto;
+    }
+
+    nav,
+    form {
+      margin-bottom: 1.5rem;
+    }
+
+    nav a {
+      margin-right: 1rem;
+    }
+
+    label {
+      margin-right: 0.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid #bbb;
+      padding: 0.5rem;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+<nav aria-label="Main navigation">
+  <a th:href="@{/legosets}">LEGO Sets</a>
+  <a th:href="@{/legopieces}">LEGO Pieces</a>
+  <a th:href="@{/legosets/add}">Add LEGO Set</a>
+  <a th:href="@{/legopieces/add}">Add LEGO Piece</a>
+</nav>
+
+<main>
+  <h1>LEGO Pieces</h1>
+
+  <form th:action="@{/legopieces/search}" method="get">
+    <label for="name">Name contains:</label>
+
+    <input id="name"
+           type="search"
+           name="name"
+           th:value="${name}">
+
+    <label for="material">Material:</label>
+
+    <select id="material" name="material">
+      <option value="">-- Any --</option>
+
+      <option th:each="m : ${materials}"
+              th:value="${m}"
+              th:text="${m}"
+              th:selected="${material == m.name()}">
+        PLASTIC
+      </option>
+    </select>
+
+    <button type="submit">Filter</button>
+    <a th:href="@{/legopieces}">Clear</a>
+  </form>
+
+  <p th:if="${#lists.isEmpty(legoPieces)}">
+    No LEGO pieces found.
+  </p>
+
+  <table th:unless="${#lists.isEmpty(legoPieces)}">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Color</th>
+      <th>Material</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="piece : ${legoPieces}">
+      <td th:text="${piece.name}">Name</td>
+      <td th:text="${piece.color}">Color</td>
+      <td th:text="${piece.material}">PLASTIC</td>
+    </tr>
+    </tbody>
+  </table>
+</main>
+</body>
+</html>
