@@ -33,7 +33,7 @@ public class LegoPieceController {
         return Material.values();
     }
 
-    // GET /legopieces - display all LEGO pieces.          ← RESTORED
+    // GET /legopieces - display all LEGO pieces.
     @GetMapping
     public String showLegoPieces(Model model) {
         log.debug("GET /legopieces called");
@@ -60,7 +60,7 @@ public class LegoPieceController {
         return "addlegopiece";
     }
 
-    // POST /legopieces/add - save the new piece, then redirect (PRG).   ← NEW
+    // POST /legopieces/add - save the new piece, then redirect (PRG).
     @PostMapping("/add")
     public String processAddLegoPiece(
             @ModelAttribute("legoPieceForm") LegoPieceForm form
