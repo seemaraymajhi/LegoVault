@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>LegoVault - Add LEGO Set</title>
+</head>
+
+<body>
+<nav aria-label="Main navigation">
+  <a th:href="@{/legosets}">LEGO Sets</a>
+  <a th:href="@{/legopieces}">LEGO Pieces</a>
+  <a th:href="@{/legosets/add}">Add LEGO Set</a>
+  <a th:href="@{/legopieces/add}">Add LEGO Piece</a>
+</nav>
+
+<main>
+  <h1>Add a LEGO Set</h1>
+
+  <form th:action="@{/legosets/add}"
+        th:object="${legoSetForm}"
+        method="post">
+
+    <p>
+      <label for="name">Name:</label>
+
+      <input id="name"
+             type="text"
+             th:field="*{name}"
+             required>
+    </p>
+
+    <p>
+      <label for="pieceCount">Number of pieces:</label>
+
+      <input id="pieceCount"
+             type="number"
+             min="1"
+             step="1"
+             th:field="*{pieceCount}"
+             required>
+    </p>
+
+    <p>
+      <label for="price">Price (EUR):</label>
+
+      <input id="price"
+             type="number"
+             min="0"
+             step="0.01"
+             th:field="*{price}"
+             required>
+    </p>
+
+    <p>
+      <label for="releaseDate">Release date:</label>
+
+      <input id="releaseDate"
+             type="date"
+             th:field="*{releaseDate}"
+             required>
+    </p>
+
+    <p>
+      <label for="difficulty">Difficulty:</label>
+
+      <select id="difficulty"
+              th:field="*{difficulty}"
+              required>
+
+        <option value="">
+          -- Select a difficulty --
+        </option>
+
+        <option th:each="difficultyOption : ${difficulties}"
+                th:value="${difficultyOption}"
+                th:text="${difficultyOption}">
+          EASY
+        </option>
+      </select>
+    </p>
+
+    <p>
+      <input id="retired"
+             type="checkbox"
+             th:field="*{retired}">
+
+      <label for="retired">
+        Retired
+      </label>
+    </p>
+
+    <p>
+      <label for="imageUrl">Image URL:</label>
+
+      <input id="imageUrl"
+             type="url"
+             th:field="*{imageUrl}"
+             required>
+    </p>
+
+    <p>
+      <label for="pieceName">Contains LEGO piece:</label>
+
+      <select id="pieceName"
+              th:field="*{pieceName}"
+              required>
+
+        <option value="">
+          -- Select a LEGO piece --
+        </option>
+
+        <option th:each="piece : ${legoPieces}"
+                th:value="${piece.name}"
+                th:text="${piece.name + ' (' + piece.color + ')'}">
+          2x4 Brick (Red)
+        </option>
+      </select>
+    </p>
+
+    <button type="submit">
+      Add LEGO Set
+    </button>
+
+    <a th:href="@{/legosets}">
+      Cancel
+    </a>
+  </form>
+</main>
+</body>
+</html>
