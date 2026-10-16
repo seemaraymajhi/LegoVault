@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>LegoVault - Add LEGO Piece</title>
+</head>
+
+<body>
+<nav aria-label="Main navigation">
+  <a th:href="@{/legosets}">LEGO Sets</a>
+  <a th:href="@{/legopieces}">LEGO Pieces</a>
+  <a th:href="@{/legosets/add}">Add LEGO Set</a>
+  <a th:href="@{/legopieces/add}">Add LEGO Piece</a>
+</nav>
+
+<main>
+  <h1>Add a LEGO Piece</h1>
+
+  <form th:action="@{/legopieces/add}" th:object="${legoPieceForm}" method="post">
+    <p>
+      <label for="name">Name:</label>
+      <input id="name" type="text" th:field="*{name}" required>
+    </p>
+
+    <p>
+      <label for="color">Color:</label>
+      <input id="color" type="text" th:field="*{color}" required>
+    </p>
+
+    <p>
+      <label for="material">Material:</label>
+      <select id="material" th:field="*{material}" required>
+        <option value="">-- Select a material --</option>
+        <option th:each="m : ${materials}"
+                th:value="${m}"
+                th:text="${m}">PLASTIC</option>
+      </select>
+    </p>
+
+    <button type="submit">Add LEGO Piece</button>
+  </form>
+</main>
+</body>
+</html>
