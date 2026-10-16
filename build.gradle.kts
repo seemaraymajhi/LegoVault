@@ -16,6 +16,7 @@ dependencies {
         implementation("org.springframework.boot:spring-boot-starter-webmvc")
         implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
+        developmentOnly("org.springframework.boot:spring-boot-devtools")
     }
 }
 
