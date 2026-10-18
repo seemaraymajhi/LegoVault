@@ -4,6 +4,8 @@ import be.kdg.legoproject.domain.LegoPiece;
 import be.kdg.legoproject.domain.LegoSet;
 import be.kdg.legoproject.repository.LegoPieceRepository;
 import be.kdg.legoproject.repository.LegoSetRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +14,9 @@ import java.util.List;
 // using the repositories to retrieve and store the data.
 @Service
 public class DefaultLegoSetService implements LegoSetService {
+
+    private static final Logger log =
+            LoggerFactory.getLogger(DefaultLegoSetService.class);
 
     private final LegoSetRepository legoSetRepository;
     private final LegoPieceRepository legoPieceRepository;
@@ -34,6 +39,10 @@ public class DefaultLegoSetService implements LegoSetService {
     public List<LegoSet> getLegoSetsWithMinimumPieces(
             int minimumPieces
     ) {
+        log.debug("Filtering LEGO sets with minimum piece count {} pieces",
+                minimumPieces
+        );
+
         // Stream through all sets, keep matching sets, and collect a new list.
         return legoSetRepository.getAll()
                 .stream()
@@ -58,6 +67,10 @@ public class DefaultLegoSetService implements LegoSetService {
                                 "Unknown LEGO piece: " + pieceName
                         )
                 );
+
+        log.debug("Adding LEGO set '{}' with related piece '{}'",
+                legoSet.getName(),
+                selectedPiece.getName());
 
         // 2. Link set and piece (also updates the piece's list of sets).
         legoSet.addLegoPiece(selectedPiece);
