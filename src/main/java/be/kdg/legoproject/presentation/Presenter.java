@@ -2,14 +2,20 @@ package be.kdg.legoproject.presentation;
 
 import be.kdg.legoproject.service.LegoPieceService;
 import be.kdg.legoproject.service.LegoSetService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
 import java.util.Arrays;
 
 
 // Coordinates the View and business services.
 @Component
 public class Presenter implements CommandLineRunner {
+
+    private static final Logger log =
+            LoggerFactory.getLogger(Presenter.class);
 
     private final View view;
     private final LegoSetService legoSetService;
@@ -30,6 +36,7 @@ public class Presenter implements CommandLineRunner {
         boolean consoleMode = Arrays.stream(args)
                 .anyMatch("--console"::equalsIgnoreCase);
 
+        log.debug("Presenter started, console mode = {}", consoleMode);
 
         if (consoleMode) {
             start();

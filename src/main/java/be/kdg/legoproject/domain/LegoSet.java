@@ -3,9 +3,15 @@ package be.kdg.legoproject.domain;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // DOMAIN: plain data class with no Spring or console code.
 public class LegoSet {
+
+    private static final Logger log =
+            LoggerFactory.getLogger(LegoSet.class);
+
     private final String name;
     private final int pieceCount;
     private final double price;
@@ -73,6 +79,11 @@ public class LegoSet {
         // prevents the two add methods from calling each other forever.
         if (!legoPieces.contains(legoPiece)) {
             legoPieces.add(legoPiece);
+            log.debug(
+                    "LEGO set '{}' now contains piece '{}'",
+                    name,
+                    legoPiece.getName()
+            );
             legoPiece.addLegoSet(this);
         }
     }

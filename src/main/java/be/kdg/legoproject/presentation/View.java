@@ -2,6 +2,8 @@ package be.kdg.legoproject.presentation;
 
 import be.kdg.legoproject.domain.LegoPiece;
 import be.kdg.legoproject.domain.LegoSet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -10,6 +12,9 @@ import java.util.Scanner;
 // Handles console input and output only.
 @Component
 public class View {
+
+    private static final Logger log =
+            LoggerFactory.getLogger(View.class);
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -49,6 +54,8 @@ public class View {
 
     public void showLegoSets(String title, List<LegoSet> legoSets) {
         showTitle(title);
+        log.debug("Showing {} LEGO set(s) with title '{}'",
+                legoSets.size(), title);
 
         if (legoSets.isEmpty()) {
             showMessage("No LEGO sets found.");
@@ -59,6 +66,9 @@ public class View {
     }
 
     public void showLegoPieces(String title, List<LegoPiece> legoPieces) {
+
+        log.debug("Showing {} LEGO piece(s) with title '{}'",
+                legoPieces.size(), title);
         showTitle(title);
 
         if (legoPieces.isEmpty()) {

@@ -2,12 +2,20 @@ package be.kdg.legoproject.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // DOMAIN: plain data class with no Spring or console code.
 public class Theme {
+
+    private static final Logger log =
+            LoggerFactory.getLogger(Theme.class);
+
     private final String name;
     private final String ageRange;
     private final String description;
+
+
 
     private final List<LegoSet> legoSets = new ArrayList<>();
 
@@ -37,6 +45,11 @@ public class Theme {
         // Maintain both sides: Theme knows its sets and each set knows its Theme.
         if (!legoSets.contains(legoSet)) {
             legoSets.add(legoSet);
+            log.debug(
+                    "Theme '{}' now has set '{}'",
+                    name,
+                    legoSet.getName()
+            );
             legoSet.setTheme(this);
         }
     }
