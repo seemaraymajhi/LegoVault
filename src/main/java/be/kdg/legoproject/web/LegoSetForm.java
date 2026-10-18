@@ -1,6 +1,8 @@
 package be.kdg.legoproject.web;
 
 import be.kdg.legoproject.domain.Difficulty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -8,6 +10,9 @@ import java.time.LocalDate;
 // Holds what the user typed in the "Add LEGO Set" form.
 // Spring creates it with the empty constructor and fills it using the setters.
 public class LegoSetForm {
+
+    private static final Logger log =
+            LoggerFactory.getLogger(LegoSetForm.class);
 
     private String name;
     private int pieceCount;
@@ -25,6 +30,7 @@ public class LegoSetForm {
     private String pieceName;
 
     public LegoSetForm() {
+        log.debug("Created a LegoSetForm backing object");
     }
 
     public String getName() {
@@ -78,6 +84,7 @@ public class LegoSetForm {
     public String getImageUrl() {
         return imageUrl;
     }
+
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
@@ -85,6 +92,7 @@ public class LegoSetForm {
     public String getPieceName() {
         return pieceName;
     }
+
     public void setPieceName(String pieceName) {
         this.pieceName = pieceName;
     }
