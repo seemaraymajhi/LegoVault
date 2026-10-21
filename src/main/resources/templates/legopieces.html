@@ -95,6 +95,8 @@
     </tr>
     </tbody>
   </table>
+  <p th:unless="${#lists.isEmpty(legoPieces)}"
+     th:text="#{legopieces.count(${#lists.size(legoPieces)})}">10 LEGO pieces</p>
 </main>
 </body>
 </html>
