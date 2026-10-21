@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<nav aria-label="Main navigation">
+<nav th:replace="~{fragments :: nav}">
     <a th:href="@{/legosets}">LEGO Sets</a>
     <a th:href="@{/legopieces}">LEGO Pieces</a>
     <a th:href="@{/legosets/add}">Add LEGO Set</a>
@@ -90,5 +90,6 @@
     <p th:unless="${#lists.isEmpty(legoSets)}"
        th:text="#{legosets.count(${#lists.size(legoSets)})}">10 LEGO sets</p>
 </main>
+<footer th:replace="~{fragments :: footer}"></footer>
 </body>
 </html>
