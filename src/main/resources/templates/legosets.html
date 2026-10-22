@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{legosets.title}">LegoVault - LEGO Sets</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+<nav th:replace="~{fragments :: nav}"></nav>
+
+<main>
+    <h1 th:text="#{legosets.heading}">LEGO Sets</h1>
+
+    <form th:action="@{/legosets/search}" method="get">
+        <label for="minPieces" th:text="#{legosets.minPieces}">Minimum number of pieces</label>
+
+        <input id="minPieces"
+               type="number"
+               name="minPieces"
+               min="0"
+               step="1"
+               required
+               th:value="${minPieces}">
+
+        <button type="submit" th:text="#{common.filter}">Filter</button>
+        <a th:href="@{/legosets}" th:text="#{common.clear}">Clear</a>
+    </form>
+
+    <p th:if="${#lists.isEmpty(legoSets)}" th:text="#{legosets.none}">No LEGO sets found.</p>
+
+    <table th:unless="${#lists.isEmpty(legoSets)}">
+        <thead>
+        <tr>
+            <th th:text="#{legoset.image}">Image</th>
+            <th th:text="#{legoset.name}">Name</th>
+            <th th:text="#{legoset.pieceCount}">Pieces</th>
+            <th th:text="#{legoset.price}">Price (EUR)</th>
+            <th th:text="#{legoset.releaseDate}">Release date</th>
+            <th th:text="#{legoset.difficulty}">Difficulty</th>
+            <th th:text="#{legoset.retired}">Retired</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="set : ${legoSets}" th:classappend="${set.pieceCount > 5000} ? 'large-set'">
+            <td>
+                <img th:src="${set.imageUrl}"
+                     th:alt="${set.name}"
+                     width="100"
+                     height="100">
+            </td>
+
+            <td th:text="${set.name}">
+                Name
+            </td>
+
+            <td th:text="${set.pieceCount}">
+                0
+            </td>
+
+            <td th:text="${#numbers.formatDecimal(set.price, 1, 2)}">
+                0.00
+            </td>
+
+            <td th:text="${set.releaseDate}">
+                2020-01-01
+            </td>
+
+            <td th:text="${set.difficulty}">
+                EASY
+            </td>
+
+            <td th:text="${set.retired} ? #{common.yes} : #{common.no}">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p th:unless="${#lists.isEmpty(legoSets)}"
+       th:text="#{legosets.count(${#lists.size(legoSets)})}">10 LEGO sets</p>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

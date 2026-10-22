@@ -14,5 +14,14 @@ public interface LegoSetService {
 
     // Returns only sets with at least the given number of pieces.
     // Example: 5000 -> Millennium Falcon, Eiffel Tower, Hogwarts Castle.
-    List<LegoSet> getLegoSetsWithMinimumPieces(int minimumPieces);
+    List<LegoSet> getLegoSetsWithMinimumPieces(
+            int minimumPieces
+    );
+
+    // Stores a new LEGO set and connects
+    // it to the selected LEGO piece.
+    void addLegoSet(
+            LegoSet legoSet,
+            String pieceName
+    );
 }

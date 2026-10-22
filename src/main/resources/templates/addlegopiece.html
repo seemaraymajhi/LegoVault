@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="#{addlegopiece.title}">LegoVault - Add LEGO Piece</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+<nav th:replace="~{fragments :: nav}"></nav>
+
+<main>
+  <h1 th:text="#{addlegopiece.heading}">Add a LEGO Piece</h1>
+
+  <form th:action="@{/legopieces/add}" th:object="${legoPieceForm}" method="post">
+    <p>
+      <label for="name" th:text="#{legopiece.name}">Name</label>
+      <input id="name" type="text" th:field="*{name}" required>
+    </p>
+
+    <p>
+      <label for="color" th:text="#{legopiece.color}">Color</label>
+      <input id="color" type="text" th:field="*{color}" required>
+    </p>
+
+    <p>
+      <label for="material" th:text="#{legopiece.material}">Material</label>
+      <select id="material" th:field="*{material}" required>
+        <option value="" th:text="#{addlegopiece.selectMaterial}">-- Select a material --</option>
+        <option th:each="m : ${materials}"
+                th:value="${m}"
+                th:text="${m}">PLASTIC</option>
+      </select>
+    </p>
+
+    <button type="submit" th:text="#{addlegopiece.submit}">Add LEGO Piece</button>
+  </form>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

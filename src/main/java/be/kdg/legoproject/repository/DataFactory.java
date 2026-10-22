@@ -5,12 +5,18 @@ import be.kdg.legoproject.domain.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 // DATA ACCESS LAYER: creates and links the sample data once at startup.
 @Component
 public class DataFactory {
+
+    private static final Logger log =
+            LoggerFactory.getLogger(DataFactory.class);
 
     // These lists act as the application's temporary in-memory data store.
     // Their contents disappear when the application stops.
@@ -254,5 +260,13 @@ public class DataFactory {
                 harryPotter,
                 ideas
         ));
+
+        log.debug(
+                "Seeded {} themes, {} LEGO sets and {} LEGO pieces",
+                themes.size(),
+                legoSets.size(),
+                legoPieces.size()
+        );
+
     }
 }

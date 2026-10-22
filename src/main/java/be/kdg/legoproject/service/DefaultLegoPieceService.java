@@ -3,6 +3,8 @@ package be.kdg.legoproject.service;
 import be.kdg.legoproject.domain.LegoPiece;
 import be.kdg.legoproject.repository.LegoPieceRepository;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -11,6 +13,9 @@ import java.util.List;
 
 @Service
 public class DefaultLegoPieceService implements LegoPieceService {
+
+    private static final Logger log =
+            LoggerFactory.getLogger(DefaultLegoPieceService.class);
 
     private final LegoPieceRepository legoPieceRepository;
 
@@ -26,6 +31,13 @@ public class DefaultLegoPieceService implements LegoPieceService {
 
     @Override
     public List<LegoPiece> searchLegoPieces(String name, String material) {
+
+        log.debug(
+                "Searching LEGO pieces with name='{}', material='{}'",
+                name,
+                material
+        );
+
         return legoPieceRepository.getAll()
                 .stream()
                 // A blank name skips this filter; otherwise compare without
@@ -43,5 +55,19 @@ public class DefaultLegoPieceService implements LegoPieceService {
                                 .name()
                                 .equalsIgnoreCase(material))
                 .toList();
+    }
+
+    // Stores a new LEGO piece through the repository.
+    // The service doesn't save anything itself;
+    // it passes the piece to the data layer.
+    @Override
+    public void addLegoPiece(LegoPiece legoPiece) {
+
+        log.debug(
+                "Adding LEGO piece '{}'",
+                legoPiece.getName()
+        );
+
+        legoPieceRepository.add(legoPiece);
     }
 }

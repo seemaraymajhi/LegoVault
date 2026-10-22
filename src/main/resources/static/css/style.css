@@ -1,0 +1,39 @@
+body {
+    font-family: sans-serif;
+    max-width: 60rem;
+    margin: 2rem auto;
+}
+
+nav,
+form {
+    margin-bottom: 1.5rem;
+}
+
+nav a {
+    margin-right: 1rem;
+}
+
+label {
+    margin-right: 0.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid #bbb;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+img {
+    object-fit: contain;
+}
+
+.large-set {
+    background-color: #fff3cd;
+    font-weight: bold;
+}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<nav th:fragment="nav" aria-label="Main navigation">
+    <a th:href="@{/legosets}" th:text="#{nav.legosets}">LEGO Sets</a>
+    <a th:href="@{/legopieces}" th:text="#{nav.legopieces}">LEGO Pieces</a>
+    <a th:href="@{/legosets/add}" th:text="#{nav.addlegoset}">Add LEGO Set</a>
+    <a th:href="@{/legopieces/add}" th:text="#{nav.addlegopiece}">Add LEGO Piece</a>
+</nav>
+
+<footer th:fragment="footer">
+    <p th:text="#{footer.copyright}">&copy; 2026 LegoVault</p>
+</footer>
+
+</body>
+</html>

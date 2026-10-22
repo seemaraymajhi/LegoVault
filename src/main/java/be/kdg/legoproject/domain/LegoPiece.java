@@ -2,9 +2,15 @@ package be.kdg.legoproject.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // DOMAIN: plain data class with no Spring or console code.
 public class LegoPiece {
+
+    private static final Logger log =
+            LoggerFactory.getLogger(LegoPiece.class);
+
     private final String name;
     private final String color;
     private final Material material;
@@ -37,6 +43,11 @@ public class LegoPiece {
         // prevents the two add methods from calling each other forever.
         if (!legoSets.contains(legoSet)) {
             legoSets.add(legoSet);
+            log.debug(
+                    "LEGO piece '{}' is now used in set '{}'",
+                    name,
+                    legoSet.getName()
+            );
             legoSet.addLegoPiece(this);
         }
     }
