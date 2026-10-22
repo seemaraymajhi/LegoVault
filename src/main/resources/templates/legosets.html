@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>LegoVault - LEGO Sets</title>
+    <title th:text="#{legosets.title}">LegoVault - LEGO Sets</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
 </head>
@@ -11,12 +11,10 @@
 <nav th:replace="~{fragments :: nav}"></nav>
 
 <main>
-    <h1>LEGO Sets</h1>
+    <h1 th:text="#{legosets.heading}">LEGO Sets</h1>
 
     <form th:action="@{/legosets/search}" method="get">
-        <label for="minPieces">
-            Minimum number of pieces:
-        </label>
+        <label for="minPieces" th:text="#{legosets.minPieces}">Minimum number of pieces</label>
 
         <input id="minPieces"
                type="number"
@@ -26,24 +24,22 @@
                required
                th:value="${minPieces}">
 
-        <button type="submit">Filter</button>
-        <a th:href="@{/legosets}">Clear</a>
+        <button type="submit" th:text="#{common.filter}">Filter</button>
+        <a th:href="@{/legosets}" th:text="#{common.clear}">Clear</a>
     </form>
 
-    <p th:if="${#lists.isEmpty(legoSets)}">
-        No LEGO sets found.
-    </p>
+    <p th:if="${#lists.isEmpty(legoSets)}" th:text="#{legosets.none}">No LEGO sets found.</p>
 
     <table th:unless="${#lists.isEmpty(legoSets)}">
         <thead>
         <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Pieces</th>
-            <th>Price (EUR)</th>
-            <th>Release date</th>
-            <th>Difficulty</th>
-            <th>Retired</th>
+            <th th:text="#{legoset.image}">Image</th>
+            <th th:text="#{legoset.name}">Name</th>
+            <th th:text="#{legoset.pieceCount}">Pieces</th>
+            <th th:text="#{legoset.price}">Price (EUR)</th>
+            <th th:text="#{legoset.releaseDate}">Release date</th>
+            <th th:text="#{legoset.difficulty}">Difficulty</th>
+            <th th:text="#{legoset.retired}">Retired</th>
         </tr>
         </thead>
 
@@ -76,8 +72,7 @@
                 EASY
             </td>
 
-            <td th:text="${set.retired ? 'Yes' : 'No'}">
-                No
+            <td th:text="${set.retired} ? #{common.yes} : #{common.no}">
             </td>
         </tr>
         </tbody>
