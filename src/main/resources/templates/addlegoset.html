@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>LegoVault - Add LEGO Set</title>
+  <title th:text="#{addlegoset.title}">LegoVault - Add LEGO Set</title>
   <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
@@ -10,14 +10,14 @@
 <nav th:replace="~{fragments :: nav}"></nav>
 
 <main>
-  <h1>Add a LEGO Set</h1>
+  <h1 th:text="#{addlegoset.heading}">Add a LEGO Set</h1>
 
   <form th:action="@{/legosets/add}"
         th:object="${legoSetForm}"
         method="post">
 
     <p>
-      <label for="name">Name:</label>
+      <label for="name" th:text="#{legoset.name}">Name</label>
 
       <input id="name"
              type="text"
@@ -26,7 +26,7 @@
     </p>
 
     <p>
-      <label for="pieceCount">Number of pieces:</label>
+      <label for="pieceCount" th:text="#{legoset.pieceCount}">Number of pieces</label>
 
       <input id="pieceCount"
              type="number"
@@ -37,7 +37,7 @@
     </p>
 
     <p>
-      <label for="price">Price (EUR):</label>
+      <label for="price" th:text="#{legoset.price}">Price (EUR)</label>
 
       <input id="price"
              type="number"
@@ -48,7 +48,7 @@
     </p>
 
     <p>
-      <label for="releaseDate">Release date:</label>
+      <label for="releaseDate" th:text="#{legoset.releaseDate}">Release date</label>
 
       <input id="releaseDate"
              type="date"
@@ -57,15 +57,13 @@
     </p>
 
     <p>
-      <label for="difficulty">Difficulty:</label>
+      <label for="difficulty" th:text="#{legoset.difficulty}">Difficulty</label>
 
       <select id="difficulty"
               th:field="*{difficulty}"
               required>
 
-        <option value="">
-          -- Select a difficulty --
-        </option>
+        <option value="" th:text="#{addlegoset.selectDifficulty}">-- Select a difficulty --</option>
 
         <option th:each="difficultyOption : ${difficulties}"
                 th:value="${difficultyOption}"
@@ -80,13 +78,11 @@
              type="checkbox"
              th:field="*{retired}">
 
-      <label for="retired">
-        Retired
-      </label>
+      <label for="retired" th:text="#{legoset.retired}">Retired</label>
     </p>
 
     <p>
-      <label for="imageUrl">Image URL:</label>
+      <label for="imageUrl" th:text="#{legoset.imageUrl}">Image URL</label>
 
       <input id="imageUrl"
              type="url"
@@ -95,15 +91,13 @@
     </p>
 
     <p>
-      <label for="pieceName">Contains LEGO piece:</label>
+      <label for="pieceName" th:text="#{legoset.piece}">Contains LEGO piece</label>
 
       <select id="pieceName"
               th:field="*{pieceName}"
               required>
 
-        <option value="">
-          -- Select a LEGO piece --
-        </option>
+        <option value="" th:text="#{addlegoset.selectPiece}">-- Select a LEGO piece --</option>
 
         <option th:each="piece : ${legoPieces}"
                 th:value="${piece.name}"
@@ -113,13 +107,9 @@
       </select>
     </p>
 
-    <button type="submit">
-      Add LEGO Set
-    </button>
+    <button type="submit" th:text="#{addlegoset.submit}">Add LEGO Set</button>
 
-    <a th:href="@{/legosets}">
-      Cancel
-    </a>
+    <a th:href="@{/legosets}" th:text="#{common.cancel}">Cancel</a>
   </form>
 </main>
 <footer th:replace="~{fragments :: footer}"></footer>
