@@ -32,3 +32,8 @@ td {
 img {
     object-fit: contain;
 }
+
+.large-set {
+    background-color: #fff3cd;
+    font-weight: bold;
+}
