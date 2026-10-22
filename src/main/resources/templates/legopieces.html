@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>LegoVault - LEGO Pieces</title>
+  <title th:text="#{legopieces.title}">LegoVault - LEGO Pieces</title>
   <link rel="stylesheet" th:href="@{/css/style.css}">
 
 </head>
@@ -11,20 +11,20 @@
 <nav th:replace="~{fragments :: nav}"></nav>
 
 <main>
-  <h1>LEGO Pieces</h1>
+  <h1 th:text="#{legopieces.heading}">LEGO Pieces</h1>
 
   <form th:action="@{/legopieces/search}" method="get">
-    <label for="name">Name contains:</label>
+    <label for="name" th:text="#{legopieces.nameContains}">Name contains</label>
 
     <input id="name"
            type="search"
            name="name"
            th:value="${name}">
 
-    <label for="material">Material:</label>
+    <label for="material" th:text="#{legopiece.material}">Material</label>
 
     <select id="material" name="material">
-      <option value="">-- Any --</option>
+      <option value="" th:text="#{legopieces.anyMaterial}">-- Any --</option>
 
       <option th:each="m : ${materials}"
               th:value="${m}"
@@ -34,20 +34,18 @@
       </option>
     </select>
 
-    <button type="submit">Filter</button>
-    <a th:href="@{/legopieces}">Clear</a>
+    <button type="submit" th:text="#{common.filter}">Filter</button>
+    <a th:href="@{/legopieces}" th:text="#{common.clear}">Clear</a>
   </form>
 
-  <p th:if="${#lists.isEmpty(legoPieces)}">
-    No LEGO pieces found.
-  </p>
+  <p th:if="${#lists.isEmpty(legoPieces)}" th:text="#{legopieces.none}">No LEGO pieces found.</p>
 
   <table th:unless="${#lists.isEmpty(legoPieces)}">
     <thead>
     <tr>
-      <th>Name</th>
-      <th>Color</th>
-      <th>Material</th>
+      <th th:text="#{legopiece.name}">Name</th>
+      <th th:text="#{legopiece.color}">Color</th>
+      <th th:text="#{legopiece.material}">Material</th>
     </tr>
     </thead>
 
