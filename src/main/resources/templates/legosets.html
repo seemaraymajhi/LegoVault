@@ -44,7 +44,7 @@
         </thead>
 
         <tbody>
-        <tr th:each="set : ${legoSets}">
+        <tr th:each="set : ${legoSets}" th:classappend="${set.pieceCount > 5000} ? 'large-set'">
             <td>
                 <img th:src="${set.imageUrl}"
                      th:alt="${set.name}"
