@@ -2,9 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<nav th:fragment="nav" class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark" aria-label="Main navigation">
-    <div class="container">
-        <a class="navbar-brand" th:href="@{/legosets}" th:text="#{nav.brand}">LegoVault</a>
+<nav th:fragment="nav" class="navbar navbar-expand-lg bg-warning border-bottom border-dark border-3 shadow-sm" data-bs-theme="light" aria-label="Main navigation">
+    <a class="navbar-brand fw-bold" th:href="@{/legosets}" th:text="#{nav.brand}">LegoVault</a>
         <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse" data-bs-target="#mainNav"
                 aria-controls="mainNav" aria-expanded="false" th:aria-label="#{nav.toggle}">
@@ -21,7 +20,7 @@
     </div>
 </nav>
 
-<footer th:fragment="footer" class="bg-dark text-white-50 text-center py-3 mt-5">
+<footer th:fragment="footer" class="bg-warning text-dark text-center py-3 mt-5 border-top border-dark border-3">
     <p class="mb-0" th:text="#{footer.copyright}">&copy; 2026 LegoVault</p>
 </footer>
 
