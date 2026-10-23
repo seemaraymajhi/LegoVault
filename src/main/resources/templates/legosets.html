@@ -33,53 +33,23 @@
 
     <p th:if="${#lists.isEmpty(legoSets)}" th:text="#{legosets.none}">No LEGO sets found.</p>
 
-    <table th:unless="${#lists.isEmpty(legoSets)}">
-        <thead>
-        <tr>
-            <th th:text="#{legoset.image}">Image</th>
-            <th th:text="#{legoset.name}">Name</th>
-            <th th:text="#{legoset.pieceCount}">Pieces</th>
-            <th th:text="#{legoset.price}">Price (EUR)</th>
-            <th th:text="#{legoset.releaseDate}">Release date</th>
-            <th th:text="#{legoset.difficulty}">Difficulty</th>
-            <th th:text="#{legoset.retired}">Retired</th>
-        </tr>
-        </thead>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4"
+         th:unless="${#lists.isEmpty(legoSets)}">
+        <div class="col" th:each="set : ${legoSets}">
+            <div class="card h-100 shadow-sm"
+                 th:classappend="${set.pieceCount > 5000} ? 'border-warning border-3'">
+                <div class="ratio ratio-4x3">
+                    <img class="card-img-top object-fit-contain p-2"
+                         th:src="${set.imageUrl}" th:alt="${set.name}">
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title h5" th:text="${set.name}">Name</h2>
+                    <p class="card-text" th:text="#{legoset.pieceCount} + ': ' + ${set.pieceCount}">Pieces: 0</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <tbody>
-        <tr th:each="set : ${legoSets}" th:classappend="${set.pieceCount > 5000} ? 'large-set'">
-            <td>
-                <img th:src="${set.imageUrl}"
-                     th:alt="${set.name}"
-                     width="100"
-                     height="100">
-            </td>
-
-            <td th:text="${set.name}">
-                Name
-            </td>
-
-            <td th:text="${set.pieceCount}">
-                0
-            </td>
-
-            <td th:text="${#numbers.formatDecimal(set.price, 1, 2)}">
-                0.00
-            </td>
-
-            <td th:text="${set.releaseDate}">
-                2020-01-01
-            </td>
-
-            <td th:text="${set.difficulty}">
-                EASY
-            </td>
-
-            <td th:text="${set.retired} ? #{common.yes} : #{common.no}">
-            </td>
-        </tr>
-        </tbody>
-    </table>
     <p th:unless="${#lists.isEmpty(legoSets)}"
        th:text="#{legosets.count(${#lists.size(legoSets)})}">10 LEGO sets</p>
 </main>
