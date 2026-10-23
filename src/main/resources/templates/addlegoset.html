@@ -1,119 +1,136 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title th:text="#{addlegoset.title}">LegoVault - Add LEGO Set</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-  <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
-  <link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta charset="UTF-8">
+    <title th:text="#{addlegoset.title}">LegoVault - Add LEGO Set</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
 <nav th:replace="~{fragments :: nav}"></nav>
 
 <main>
-  <h1 th:text="#{addlegoset.heading}">Add a LEGO Set</h1>
+    <h1 th:text="#{addlegoset.heading}">Add a LEGO Set</h1>
 
-  <form th:action="@{/legosets/add}"
-        th:object="${legoSetForm}"
-        method="post">
+    <form class="row g-3"
+          th:action="@{/legosets/add}"
+          th:object="${legoSetForm}"
+          method="post">
 
-    <p>
-      <label for="name" th:text="#{legoset.name}">Name</label>
+        <div class="col-12">
+            <label for="name" class="form-label" th:text="#{legoset.name}">Name</label>
 
-      <input id="name"
-             type="text"
-             th:field="*{name}"
-             required>
-    </p>
+            <input id="name"
+                   class="form-control"
+                   type="text"
+                   th:field="*{name}"
+                   required>
+        </div>
 
-    <p>
-      <label for="pieceCount" th:text="#{legoset.pieceCount}">Number of pieces</label>
+        <div class="col-md-6">
+            <label for="pieceCount" class="form-label" th:text="#{legoset.pieceCount}">Number of pieces</label>
 
-      <input id="pieceCount"
-             type="number"
-             min="1"
-             step="1"
-             th:field="*{pieceCount}"
-             required>
-    </p>
+            <input id="pieceCount"
+                   class="form-control"
+                   type="number"
+                   min="1"
+                   step="1"
+                   th:field="*{pieceCount}"
+                   required>
+        </div>
 
-    <p>
-      <label for="price" th:text="#{legoset.price}">Price (EUR)</label>
+        <div class="col-md-6">
+            <label for="price" class="form-label" th:text="#{legoset.price}">Price (EUR)</label>
 
-      <input id="price"
-             type="number"
-             min="0"
-             step="0.01"
-             th:field="*{price}"
-             required>
-    </p>
+            <div class="input-group">
+                <span class="input-group-text">€</span>
 
-    <p>
-      <label for="releaseDate" th:text="#{legoset.releaseDate}">Release date</label>
+                <input id="price"
+                       class="form-control"
+                       type="number"
+                       min="0"
+                       step="0.01"
+                       th:field="*{price}"
+                       required>
+            </div>
+        </div>
 
-      <input id="releaseDate"
-             type="date"
-             th:field="*{releaseDate}"
-             required>
-    </p>
+        <div class="col-md-6">
+            <label for="releaseDate" class="form-label" th:text="#{legoset.releaseDate}">Release date</label>
 
-    <p>
-      <label for="difficulty" th:text="#{legoset.difficulty}">Difficulty</label>
+            <input id="releaseDate"
+                   class="form-control"
+                   type="date"
+                   th:field="*{releaseDate}"
+                   required>
+        </div>
 
-      <select id="difficulty"
-              th:field="*{difficulty}"
-              required>
+        <div class="col-md-6">
+            <label for="difficulty" class="form-label" th:text="#{legoset.difficulty}">Difficulty</label>
 
-        <option value="" th:text="#{addlegoset.selectDifficulty}">-- Select a difficulty --</option>
+            <select id="difficulty"
+                    class="form-select"
+                    th:field="*{difficulty}"
+                    required>
 
-        <option th:each="difficultyOption : ${difficulties}"
-                th:value="${difficultyOption}"
-                th:text="${difficultyOption}">
-          EASY
-        </option>
-      </select>
-    </p>
+                <option value="" th:text="#{addlegoset.selectDifficulty}">-- Select a difficulty --</option>
 
-    <p>
-      <input id="retired"
-             type="checkbox"
-             th:field="*{retired}">
+                <option th:each="difficultyOption : ${difficulties}"
+                        th:value="${difficultyOption}"
+                        th:text="${difficultyOption}">
+                    EASY
+                </option>
+            </select>
+        </div>
 
-      <label for="retired" th:text="#{legoset.retired}">Retired</label>
-    </p>
+        <div class="col-12">
+            <label for="imageUrl" class="form-label" th:text="#{legoset.imageUrl}">Image URL</label>
 
-    <p>
-      <label for="imageUrl" th:text="#{legoset.imageUrl}">Image URL</label>
+            <input id="imageUrl"
+                   class="form-control"
+                   type="url"
+                   th:field="*{imageUrl}"
+                   required>
+        </div>
 
-      <input id="imageUrl"
-             type="url"
-             th:field="*{imageUrl}"
-             required>
-    </p>
+        <div class="col-12">
+            <label for="pieceName" class="form-label" th:text="#{legoset.piece}">Contains LEGO piece</label>
 
-    <p>
-      <label for="pieceName" th:text="#{legoset.piece}">Contains LEGO piece</label>
+            <select id="pieceName"
+                    class="form-select"
+                    th:field="*{pieceName}"
+                    required>
 
-      <select id="pieceName"
-              th:field="*{pieceName}"
-              required>
+                <option value="" th:text="#{addlegoset.selectPiece}">-- Select a LEGO piece --</option>
 
-        <option value="" th:text="#{addlegoset.selectPiece}">-- Select a LEGO piece --</option>
+                <option th:each="piece : ${legoPieces}"
+                        th:value="${piece.name}"
+                        th:text="${piece.name + ' (' + piece.color + ')'}">
+                    2x4 Brick (Red)
+                </option>
+            </select>
+        </div>
 
-        <option th:each="piece : ${legoPieces}"
-                th:value="${piece.name}"
-                th:text="${piece.name + ' (' + piece.color + ')'}">
-          2x4 Brick (Red)
-        </option>
-      </select>
-    </p>
+        <div class="col-12">
+            <div class="form-check">
+                <input id="retired"
+                       class="form-check-input"
+                       type="checkbox"
+                       th:field="*{retired}">
 
-    <button type="submit" th:text="#{addlegoset.submit}">Add LEGO Set</button>
+                <label for="retired" class="form-check-label" th:text="#{legoset.retired}">Retired</label>
+            </div>
+        </div>
 
-    <a th:href="@{/legosets}" th:text="#{common.cancel}">Cancel</a>
-  </form>
+        <div class="col-12">
+            <button type="submit" class="btn btn-warning" th:text="#{addlegoset.submit}">Add LEGO Set</button>
+
+            <a class="btn btn-outline-dark" th:href="@{/legosets}" th:text="#{common.cancel}">Cancel</a>
+        </div>
+    </form>
 </main>
 <footer th:replace="~{fragments :: footer}"></footer>
 </body>
