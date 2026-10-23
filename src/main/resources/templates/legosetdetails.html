@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{legosetdetails.title}">LegoVault - LEGO Set Details</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+<nav th:replace="~{fragments :: nav}"></nav>
+
+<main>
+    <h1 class="mb-4" th:text="${legoSet.name}">LEGO set name</h1>
+
+    <div class="row g-4">
+        <div class="col-md-5">
+            <img class="img-fluid rounded border p-2"
+                 th:src="${legoSet.imageUrl}"
+                 th:alt="${legoSet.name}">
+        </div>
+
+        <div class="col-md-7">
+            <dl class="row">
+                <dt class="col-sm-4" th:text="#{legoset.pieceCount}">Pieces</dt>
+                <dd class="col-sm-8" th:text="${legoSet.pieceCount}">0</dd>
+
+                <dt class="col-sm-4" th:text="#{legoset.price}">Price (EUR)</dt>
+                <dd class="col-sm-8" th:text="${#numbers.formatDecimal(legoSet.price, 1, 2)}">0.00</dd>
+
+                <dt class="col-sm-4" th:text="#{legoset.releaseDate}">Release date</dt>
+                <dd class="col-sm-8" th:text="${legoSet.releaseDate}">2020-01-01</dd>
+
+                <dt class="col-sm-4" th:text="#{legoset.difficulty}">Difficulty</dt>
+                <dd class="col-sm-8" th:text="${legoSet.difficulty}">EASY</dd>
+
+                <dt class="col-sm-4" th:text="#{legoset.retired}">Retired</dt>
+                <dd class="col-sm-8" th:text="${legoSet.retired} ? #{common.yes} : #{common.no}">No</dd>
+
+                <dt class="col-sm-4" th:text="#{legoset.theme}">Theme</dt>
+                <dd class="col-sm-8"
+                    th:text="${legoSet.theme != null} ? ${legoSet.theme.name} : #{legosetdetails.noTheme}">
+                    Theme
+                </dd>
+            </dl>
+
+            <h2 class="h5" th:text="#{legoset.pieces}">LEGO pieces</h2>
+
+            <p th:if="${#lists.isEmpty(legoSet.legoPieces)}"
+               th:text="#{legosetdetails.noPieces}">This set contains no LEGO pieces.</p>
+
+            <ul class="list-group mb-4"
+                th:unless="${#lists.isEmpty(legoSet.legoPieces)}">
+                <li class="list-group-item"
+                    th:each="piece : ${legoSet.legoPieces}"
+                    th:text="${piece.name} + ' (' + ${piece.color} + ')'">
+                    Piece (Color)
+                </li>
+            </ul>
+
+            <a class="btn btn-dark"
+               th:href="@{/legosets}"
+               th:text="#{common.back}">Back to overview</a>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

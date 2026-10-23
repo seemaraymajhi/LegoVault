@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 // BUSINESS LAYER: applies LEGO set filtering and business rules,
 // using the repositories to retrieve and store the data.
@@ -48,6 +50,17 @@ public class DefaultLegoSetService implements LegoSetService {
                 .stream()
                 .filter(legoSet -> legoSet.getPieceCount() >= minimumPieces)
                 .toList();
+    }
+
+    @Override
+    public Optional<LegoSet> getLegoSetById(UUID id) {
+        log.debug("Looking up LEGO set with id {}", id);
+
+        // Stream through all sets and return the first one with this id.
+        return legoSetRepository.getAll()
+                .stream()
+                .filter(legoSet -> legoSet.getId().equals(id))
+                .findFirst();
     }
 
     @Override

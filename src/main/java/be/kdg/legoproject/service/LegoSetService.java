@@ -3,6 +3,8 @@ package be.kdg.legoproject.service;
 import be.kdg.legoproject.domain.LegoSet;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 // Business layer contract for LEGO sets.
 // The Presenter only knows this interface, not DefaultLegoSetService.
@@ -17,6 +19,9 @@ public interface LegoSetService {
     List<LegoSet> getLegoSetsWithMinimumPieces(
             int minimumPieces
     );
+
+    // Returns the LEGO set with the given id, or an empty Optional.
+    Optional<LegoSet> getLegoSetById(UUID id);
 
     // Stores a new LEGO set and connects
     // it to the selected LEGO piece.

@@ -10,13 +10,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/legosets")
@@ -81,6 +79,29 @@ public class LegoSetController {
         model.addAttribute("minPieces", minPieces);
 
         return "legosets";
+    }
+
+    // GET /legosets/{id} - show all details of one LEGO set
+    @GetMapping("/{id}")
+    public String showLegoSetDetails(@PathVariable UUID id, Model model
+    ) {
+        log.debug(
+                "GET /legosets/{} called",
+                id
+        );
+
+        Optional<LegoSet> legoSet = legoSetService.getLegoSetById(id);
+        if (legoSet.isEmpty()) {
+            log.warn("LEGO set with id {} not found; redirecting to /legosets",
+                    id
+            );
+            return "redirect:/legosets";
+        }
+
+        model.addAttribute("legoSet",
+                legoSet.get()
+        );
+        return "legosetdetails";
     }
 
     // GET /legosets/add - show an empty form

@@ -1,10 +1,12 @@
 package be.kdg.legoproject.domain;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.UUID;
 
 // DOMAIN: plain data class with no Spring or console code.
 public class LegoSet {
@@ -12,6 +14,7 @@ public class LegoSet {
     private static final Logger log =
             LoggerFactory.getLogger(LegoSet.class);
 
+    private final UUID id;
     private final String name;
     private final int pieceCount;
     private final double price;
@@ -24,6 +27,7 @@ public class LegoSet {
 
     public LegoSet(String name, int pieceCount, double price, LocalDate releaseDate,
                    Difficulty difficulty, boolean retired, String imageUrl) {
+        this.id = UUID.randomUUID();
         this.name = name;
         this.pieceCount = pieceCount;
         this.price = price;
@@ -31,6 +35,10 @@ public class LegoSet {
         this.difficulty = difficulty;
         this.retired = retired;
         this.imageUrl = imageUrl;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public String getName() {
