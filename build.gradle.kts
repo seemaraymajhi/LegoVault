@@ -14,6 +14,8 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.webjars:bootstrap:5.3.8")
+    implementation("org.webjars:webjars-locator-lite:1.1.5")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
