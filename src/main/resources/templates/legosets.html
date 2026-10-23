@@ -43,7 +43,11 @@
                          th:src="${set.imageUrl}" th:alt="${set.name}">
                 </div>
                 <div class="card-body">
-                    <h2 class="card-title h5" th:text="${set.name}">Name</h2>
+                    <h2 class="card-title h5">
+                        <a class="stretched-link text-reset text-decoration-none"
+                           th:href="@{/legosets/{id}(id=${set.id})}"
+                           th:text="${set.name}">Name</a>
+                    </h2>
                     <p class="card-text" th:text="#{legoset.pieceCount} + ': ' + ${set.pieceCount}">Pieces: 0</p>
                 </div>
             </div>
