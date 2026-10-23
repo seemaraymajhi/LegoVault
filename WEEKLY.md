@@ -147,3 +147,38 @@ See [DATA.md](DATA.md) for the domain model and sample data.
 - Create the `sprint2` tag on `main`.
 - Push the tag to GitLab.
 - Submit the tag as a comment on the assignment.
+
+
+## Week 5 - Bootstrap
+
+### Bootstrap Setup
+
+- Include Bootstrap using WebJars.
+
+### Layout and Navigation
+
+- Add a Bootstrap navbar using a Thymeleaf fragment.
+- Add a footer using a Thymeleaf fragment.
+- Add an element that is only visible on large displays (`d-none`).
+
+### LEGO Set Cards
+
+- Show the LEGO sets as Bootstrap cards with a name, an attribute and an image.
+- Display the cards in 1, 2 and 4 columns depending on the screen width.
+- Open a details page with all information when a card is clicked.
+
+### Forms
+
+- Style the add pages with Bootstrap form components.
+- Make required fields mandatory with client-side validation.
+
+### Styling
+
+- Combine Thymeleaf and Bootstrap with `th:class` (conditional styling).
+- Add a personal touch using Bootstrap components, utilities or icons.
+- Prefer Bootstrap styling over custom CSS.
+- Avoid inline CSS and inline JavaScript.
+
+### Internationalization
+
+- Make sure all new text comes from the message property files (EN and NL).
