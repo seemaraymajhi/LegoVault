@@ -2,15 +2,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<nav th:fragment="nav" aria-label="Main navigation">
-    <a th:href="@{/legosets}" th:text="#{nav.legosets}">LEGO Sets</a>
-    <a th:href="@{/legopieces}" th:text="#{nav.legopieces}">LEGO Pieces</a>
-    <a th:href="@{/legosets/add}" th:text="#{nav.addlegoset}">Add LEGO Set</a>
-    <a th:href="@{/legopieces/add}" th:text="#{nav.addlegopiece}">Add LEGO Piece</a>
+<nav th:fragment="nav" class="navbar navbar-expand-lg bg-warning border-bottom border-dark border-3 shadow-sm" data-bs-theme="light" aria-label="Main navigation">
+    <div class="container">
+    <a class="navbar-brand fw-bold" th:href="@{/legosets}" th:text="#{nav.brand}">LegoVault</a>
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#mainNav"
+                aria-controls="mainNav" aria-expanded="false" th:aria-label="#{nav.toggle}">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" th:href="@{/legosets}" th:text="#{nav.legosets}">LEGO Sets</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/legopieces}" th:text="#{nav.legopieces}">LEGO Pieces</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/legosets/add}" th:text="#{nav.addlegoset}">Add LEGO Set</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/legopieces/add}" th:text="#{nav.addlegopiece}">Add LEGO Piece</a></li>
+            </ul>
+        </div>
+    </div>
 </nav>
 
-<footer th:fragment="footer">
-    <p th:text="#{footer.copyright}">&copy; 2026 LegoVault</p>
+<footer th:fragment="footer" class="bg-warning text-dark text-center py-3 mt-5 border-top border-dark border-3">
+    <p class="mb-0" th:text="#{footer.copyright}">&copy; 2026 LegoVault</p>
 </footer>
 
 </body>
