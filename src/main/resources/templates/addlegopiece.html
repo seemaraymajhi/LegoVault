@@ -1,43 +1,66 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title th:text="#{addlegopiece.title}">LegoVault - Add LEGO Piece</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-  <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
-  <link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta charset="UTF-8">
+    <title th:text="#{addlegopiece.title}">LegoVault - Add LEGO Piece</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
 <nav th:replace="~{fragments :: nav}"></nav>
 
 <main>
-  <h1 th:text="#{addlegopiece.heading}">Add a LEGO Piece</h1>
+    <h1 th:text="#{addlegopiece.heading}">Add a LEGO Piece</h1>
 
-  <form th:action="@{/legopieces/add}" th:object="${legoPieceForm}" method="post">
-    <p>
-      <label for="name" th:text="#{legopiece.name}">Name</label>
-      <input id="name" type="text" th:field="*{name}" required>
-    </p>
+    <form class="row g-3"
+          th:action="@{/legopieces/add}"
+          th:object="${legoPieceForm}"
+          method="post">
 
-    <p>
-      <label for="color" th:text="#{legopiece.color}">Color</label>
-      <input id="color" type="text" th:field="*{color}" required>
-    </p>
+        <div class="col-md-6">
+            <label for="name" class="form-label" th:text="#{legopiece.name}">Name</label>
 
-    <p>
-      <label for="material" th:text="#{legopiece.material}">Material</label>
-      <select id="material" th:field="*{material}" required>
-        <option value="" th:text="#{addlegopiece.selectMaterial}">-- Select a material --</option>
-        <option th:each="m : ${materials}"
-                th:value="${m}"
-                th:text="${m}">PLASTIC</option>
-      </select>
-    </p>
+            <input id="name"
+                   class="form-control"
+                   type="text"
+                   th:field="*{name}"
+                   required>
+        </div>
 
-    <button type="submit" th:text="#{addlegopiece.submit}">Add LEGO Piece</button>
-  </form>
+        <div class="col-md-6">
+            <label for="color" class="form-label" th:text="#{legopiece.color}">Color</label>
+
+            <input id="color"
+                   class="form-control"
+                   type="text"
+                   th:field="*{color}"
+                   required>
+        </div>
+
+        <div class="col-12">
+            <label for="material" class="form-label" th:text="#{legopiece.material}">Material</label>
+
+            <select id="material"
+                    class="form-select"
+                    th:field="*{material}"
+                    required>
+
+                <option value="" th:text="#{addlegopiece.selectMaterial}">-- Select a material --</option>
+
+                <option th:each="m : ${materials}"
+                        th:value="${m}"
+                        th:text="${m}">
+                    PLASTIC
+                </option>
+            </select>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-warning" th:text="#{addlegopiece.submit}">Add LEGO Piece</button>
+        </div>
+    </form>
 </main>
 <footer th:replace="~{fragments :: footer}"></footer>
 </body>
