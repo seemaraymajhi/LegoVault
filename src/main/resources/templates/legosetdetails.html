@@ -14,8 +14,9 @@
 <body>
 <nav th:replace="~{fragments :: nav}"></nav>
 
-<main>
-    <h1 class="mb-4" th:text="${legoSet.name}">LEGO set name</h1>
+<main class="container mt-4">
+    <h1 class="mb-4"
+        th:text="${legoSet.name}">LEGO set name</h1>
 
     <div class="row g-4">
         <div class="col-md-5">
@@ -48,7 +49,8 @@
                 </dd>
             </dl>
 
-            <h2 class="h5" th:text="#{legoset.pieces}">LEGO pieces</h2>
+            <h2 class="h5"
+                th:text="#{legoset.pieces}">LEGO pieces</h2>
 
             <p th:if="${#lists.isEmpty(legoSet.legoPieces)}"
                th:text="#{legosetdetails.noPieces}">This set contains no LEGO pieces.</p>
@@ -64,7 +66,8 @@
 
             <a class="btn btn-dark"
                th:href="@{/legosets}">
-                <i class="bi bi-arrow-left-circle-fill" aria-hidden="true"></i>
+                <i class="bi bi-arrow-left-circle-fill"
+                   aria-hidden="true"></i>
                <span th:text="#{common.back}">Back to overview</span>
             </a>
         </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:h="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title th:text="#{legosets.title}">LegoVault - LEGO Sets</title>
@@ -14,39 +14,57 @@
 <body>
 <nav th:replace="~{fragments :: nav}"></nav>
 
-<main>
+<main class="container mt-4">
     <h1 th:text="#{legosets.heading}">LEGO Sets</h1>
 
-    <form th:action="@{/legosets/search}" method="get">
-        <label for="minPieces" th:text="#{legosets.minPieces}">Minimum number of pieces</label>
+    <form class="row g-2 align-items-end mb-4"
+          th:action="@{/legosets/search}"
+          method="get">
+        <div class="col-sm-6 col-md-4">
+            <label for="minPieces"
+                   class="form-label"
+                   th:text="#{legosets.minPieces}">Minimum number of pieces</label>
 
-        <input id="minPieces"
-               type="number"
-               name="minPieces"
-               min="0"
-               step="1"
-               required
-               th:value="${minPieces}">
+            <input id="minPieces"
+                   class="form-control"
+                   type="number"
+                   name="minPieces"
+                   min="0"
+                   step="1"
+                   required
+                   th:value="${minPieces}">
+        </div>
 
-        <button type="submit" th:text="#{common.filter}">Filter</button>
-        <a th:href="@{/legosets}" th:text="#{common.clear}">Clear</a>
+        <div class="col-auto">
+            <button type="submit"
+                    class="btn btn-warning"
+                    th:text="#{common.filter}">Filter
+            </button>
+            <a class="btn btn-outline-dark"
+               th:href="@{/legosets}"
+               th:text="#{common.clear}">Clear</a>
+        </div>
     </form>
 
-    <div class="alert alert-warning d-none d-lg-block" role="note"
+    <div class="alert alert-warning d-none d-lg-block"
+         role="note"
          th:text="#{legosets.largeHint}">
         Tip: LEGO sets with more than 5000 pieces have a yellow border.
     </div>
 
-    <p th:if="${#lists.isEmpty(legoSets)}" th:text="#{legosets.none}">No LEGO sets found.</p>
+    <p th:if="${#lists.isEmpty(legoSets)}"
+       th:text="#{legosets.none}">No LEGO sets found.</p>
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4"
          th:unless="${#lists.isEmpty(legoSets)}">
-        <div class="col" th:each="set : ${legoSets}">
+        <div class="col"
+             th:each="set : ${legoSets}">
             <div class="card h-100 shadow-sm"
                  th:classappend="${set.pieceCount > 5000} ? 'border-warning border-3'">
                 <div class="ratio ratio-4x3">
                     <img class="card-img-top object-fit-contain p-2"
-                         th:src="${set.imageUrl}" th:alt="${set.name}">
+                         th:src="${set.imageUrl}"
+                         th:alt="${set.name}">
                 </div>
                 <div class="card-body">
                     <h2 class="card-title h5">
@@ -54,7 +72,8 @@
                            th:href="@{/legosets/{id}(id=${set.id})}"
                            th:text="${set.name}">Name</a>
                     </h2>
-                    <p class="card-text" th:text="#{legoset.pieceCount} + ': ' + ${set.pieceCount}">Pieces: 0</p>
+                    <p class="card-text"
+                       th:text="#{legoset.pieceCount} + ': ' + ${set.pieceCount}">Pieces: 0</p>
                     <div class="d-flex flex-wrap gap-1">
                         <th:block th:switch="${set.difficulty.name()}">
                             <span th:case="'EASY'"

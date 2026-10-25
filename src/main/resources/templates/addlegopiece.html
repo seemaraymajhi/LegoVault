@@ -13,7 +13,7 @@
 <body>
 <nav th:replace="~{fragments :: nav}"></nav>
 
-<main>
+<main class="container mt-4">
     <h1 th:text="#{addlegopiece.heading}">Add a LEGO Piece</h1>
 
     <form class="row g-3"
@@ -22,7 +22,9 @@
           method="post">
 
         <div class="col-md-6">
-            <label for="name" class="form-label" th:text="#{legopiece.name}">Name</label>
+            <label for="name"
+                   class="form-label"
+                   th:text="#{legopiece.name}">Name</label>
 
             <input id="name"
                    class="form-control"
@@ -32,7 +34,9 @@
         </div>
 
         <div class="col-md-6">
-            <label for="color" class="form-label" th:text="#{legopiece.color}">Color</label>
+            <label for="color"
+                   class="form-label"
+                   th:text="#{legopiece.color}">Color</label>
 
             <input id="color"
                    class="form-control"
@@ -42,14 +46,17 @@
         </div>
 
         <div class="col-12">
-            <label for="material" class="form-label" th:text="#{legopiece.material}">Material</label>
+            <label for="material"
+                   class="form-label"
+                   th:text="#{legopiece.material}">Material</label>
 
             <select id="material"
                     class="form-select"
                     th:field="*{material}"
                     required>
 
-                <option value="" th:text="#{addlegopiece.selectMaterial}">-- Select a material --</option>
+                <option value=""
+                        th:text="#{addlegopiece.selectMaterial}">-- Select a material --</option>
 
                 <option th:each="m : ${materials}"
                         th:value="${m}"
@@ -59,7 +66,9 @@
             </select>
         </div>
         <div class="col-12">
-            <button type="submit" class="btn btn-warning" th:text="#{addlegopiece.submit}">Add LEGO Piece</button>
+            <button type="submit"
+                    class="btn btn-warning"
+                    th:text="#{addlegopiece.submit}">Add LEGO Piece</button>
         </div>
     </form>
 </main>

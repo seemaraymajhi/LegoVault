@@ -1,39 +1,8 @@
-body {
-    font-family: sans-serif;
-    max-width: 60rem;
-    margin: 2rem auto;
+/* Lift LEGO set cards slightly on hover; Bootstrap has no utility class for this. */
+.card {
+    transition: transform 0.2s;
 }
 
-nav,
-form {
-    margin-bottom: 1.5rem;
-}
-
-nav a {
-    margin-right: 1rem;
-}
-
-label {
-    margin-right: 0.5rem;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th,
-td {
-    border: 1px solid #bbb;
-    padding: 0.5rem;
-    text-align: left;
-}
-
-img {
-    object-fit: contain;
-}
-
-.large-set {
-    background-color: #fff3cd;
-    font-weight: bold;
+.card:hover {
+    transform: translateY(-4px);
 }
