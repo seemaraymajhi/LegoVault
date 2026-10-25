@@ -70,6 +70,9 @@
                                   class="badge text-bg-dark"
                                   th:text="${set.difficulty}">EXPERT</span>
                         </th:block>
+                        <span th:if="${set.retired}"
+                              class="badge text-bg-secondary"
+                              th:text="#{legoset.retired}">Retired</span>
                     </div>
 
                 </div>
