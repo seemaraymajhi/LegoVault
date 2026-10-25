@@ -1,16 +1,9 @@
 
-nav,
-form {
-    margin-bottom: 1.5rem;
-}
 
 nav a {
     margin-right: 1rem;
 }
 
-label {
-    margin-right: 0.5rem;
-}
 
 img {
     object-fit: contain;
