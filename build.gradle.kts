@@ -18,6 +18,7 @@ dependencies {
     implementation("org.webjars:webjars-locator-lite:1.1.5")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+    implementation("org.webjars.npm:bootstrap-icons:1.13.2")
 }
 
 tasks.withType<Test> {
