@@ -55,6 +55,26 @@
                            th:text="${set.name}">Name</a>
                     </h2>
                     <p class="card-text" th:text="#{legoset.pieceCount} + ': ' + ${set.pieceCount}">Pieces: 0</p>
+                    <div class="d-flex flex-wrap gap-1">
+                        <th:block th:switch="${set.difficulty.name()}">
+                            <span th:case="'EASY'"
+                                  class="badge text-bg-success"
+                                  th:text="${set.difficulty}">EASY</span>
+                            <span th:case="'MEDIUM'"
+                                  class="badge text-bg-info"
+                                  th:text="${set.difficulty}">MEDIUM</span>
+                            <span th:case="'HARD'"
+                                  class="badge text-bg-warning"
+                                  th:text="${set.difficulty}">HARD</span>
+                            <span th:case="*"
+                                  class="badge text-bg-dark"
+                                  th:text="${set.difficulty}">EXPERT</span>
+                        </th:block>
+                        <span th:if="${set.retired}"
+                              class="badge text-bg-secondary"
+                              th:text="#{legoset.retired}">Retired</span>
+                    </div>
+
                 </div>
             </div>
         </div>
