@@ -31,6 +31,11 @@
         <a th:href="@{/legosets}" th:text="#{common.clear}">Clear</a>
     </form>
 
+    <div class="alert alert-warning d-none d-lg-block" role="note"
+         th:text="#{legosets.largeHint}">
+        Tip: LEGO sets with more than 5000 pieces have a yellow border.
+    </div>
+
     <p th:if="${#lists.isEmpty(legoSets)}" th:text="#{legosets.none}">No LEGO sets found.</p>
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4"
