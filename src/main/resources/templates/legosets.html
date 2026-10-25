@@ -14,7 +14,7 @@
 <body>
 <nav th:replace="~{fragments :: nav}"></nav>
 
-<main>
+<main class="container mt-4">
     <h1 th:text="#{legosets.heading}">LEGO Sets</h1>
 
     <form th:action="@{/legosets/search}" method="get">
