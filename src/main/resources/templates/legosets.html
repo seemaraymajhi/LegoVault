@@ -46,10 +46,14 @@
         </div>
     </form>
 
-    <div class="alert alert-warning d-none d-lg-block"
-         role="note"
-         th:text="#{legosets.largeHint}">
-        Tip: LEGO sets with more than 5000 pieces have a yellow border.
+    <div class="alert alert-warning alert-dismissible fade show d-none d-lg-block"
+         role="note">
+        <span th:text="#{legosets.largeHint}">Tip: LEGO sets with more than 5000 pieces have a yellow border.</span>
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                th:aria-label="#{common.close}">
+        </button>
     </div>
 
     <p th:if="${#lists.isEmpty(legoSets)}"
