@@ -3,12 +3,12 @@
 See [WEEKLY.md](WEEKLY.md) for the weekly requirements and progress.
 
 ## Theme
-- id - UUID (generated automatically)
 - name - String
 - ageRange - String
 - description - String
 
 ## LegoSet
+- id - UUID (generated automatically)
 - name - String
 - pieceCount - int
 - price - double
