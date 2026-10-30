@@ -182,3 +182,39 @@ See [DATA.md](DATA.md) for the domain model and sample data.
 ### Internationalization
 
 - Make sure all new text comes from the message property files (EN and NL).
+- Translate enum values (difficulty, material) through message keys.
+
+## Week 6 - Spring MVC Controllers
+
+### ViewModels
+
+- Create a ViewModel for each of the two forms (`LegoSetViewModel`, `LegoPieceViewModel`).
+- Use wrapper types (`Integer`, `Double`) instead of primitives for form fields.
+
+### Converter
+
+- Write at least one custom `Converter` for a ViewModel field.
+- Register the converter in a `@Configuration` class that implements `WebMvcConfigurer`.
+
+### Server-Side Validation
+
+- Add the `spring-boot-starter-validation` dependency.
+- Add Bean Validation annotations to the ViewModel fields.
+- Add a message to every annotation (from the EN/NL message property files).
+- Validate with `@Valid` and `BindingResult` in the controllers.
+- Show the validation messages in the form when the user enters invalid data.
+
+### Session History
+
+- Add a session history page.
+- Show which pages the current user visited and at what time.
+- Implement it with session scope (`@SessionScope`).
+- Users in a different browser see a different history.
+
+### Sprint 3 Submission
+
+- Complete the Week 5 and Week 6 requirements.
+- Merge `dev` into `main` for the Sprint 3 release.
+- Create the annotated `sprint3` tag on `main`.
+- Push the tag to GitLab.
+- Submit the tag as a comment on the assignment.
