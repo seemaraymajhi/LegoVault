@@ -12,20 +12,20 @@
 </head>
 
 <body>
-<nav th:replace="~{fragments :: nav}"></nav>
+<header th:replace="~{fragments :: nav}"></header>
 
 <main class="container mt-4">
     <h1 class="mb-4"
         th:text="${legoSet.name}">LEGO set name</h1>
 
-    <div class="row g-4">
-        <div class="col-md-5">
+    <article class="row g-4">
+        <figure class="col-md-5">
             <img class="img-fluid rounded border p-2"
                  th:src="${legoSet.imageUrl}"
                  th:alt="${legoSet.name}">
-        </div>
+        </figure>
 
-        <div class="col-md-7">
+        <section class="col-md-7">
             <dl class="row">
                 <dt class="col-sm-4" th:text="#{legoset.pieceCount}">Pieces</dt>
                 <dd class="col-sm-8" th:text="${legoSet.pieceCount}">0</dd>
@@ -50,10 +50,10 @@
             </dl>
 
 
-            <div class="accordion mb-4"
-                 id="themeAccordion"
-                 th:if="${legoSet.theme != null}">
-                <div class="accordion-item">
+            <section class="accordion mb-4"
+                     id="themeAccordion"
+                     th:if="${legoSet.theme != null}">
+                <article class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed"
                                 type="button"
@@ -66,10 +66,10 @@
                         </button>
                     </h2>
 
-                    <div id="themeInfo"
-                         class="accordion-collapse collapse"
-                         data-bs-parent="#themeAccordion">
-                        <div class="accordion-body">
+                    <section id="themeInfo"
+                             class="accordion-collapse collapse"
+                             data-bs-parent="#themeAccordion">
+                        <section class="accordion-body">
                             <p class="mb-1">
                                 <strong th:text="#{theme.ageRange}">Age range</strong>:
                                 <span th:text="${legoSet.theme.ageRange}">9+</span>
@@ -77,10 +77,10 @@
 
                             <p class="mb-0"
                                th:text="${legoSet.theme.description}">Description</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        </section>
+                    </section>
+                </article>
+            </section>
 
             <h2 class="h5"
                 th:text="#{legoset.pieces}">LEGO pieces</h2>
@@ -103,8 +103,8 @@
                    aria-hidden="true"></i>
                 <span th:text="#{common.back}">Back to overview</span>
             </a>
-        </div>
-    </div>
+        </section>
+    </article>
 </main>
 <footer th:replace="~{fragments :: footer}"></footer>
 </body>

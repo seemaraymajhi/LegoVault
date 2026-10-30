@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<nav th:replace="~{fragments :: nav}"></nav>
+<header th:replace="~{fragments :: nav}"></header>
 
 <main class="container mt-4">
     <h1 th:text="#{legosets.heading}">LEGO Sets</h1>
@@ -20,7 +20,7 @@
     <form class="row g-2 align-items-end mb-4"
           th:action="@{/legosets/search}"
           method="get">
-        <div class="col-sm-6 col-md-4">
+        <fieldset class="col-sm-6 col-md-4">
             <label for="minPieces"
                    class="form-label"
                    th:text="#{legosets.minPieces}">Minimum number of pieces</label>
@@ -33,9 +33,9 @@
                    step="1"
                    required
                    th:value="${minPieces}">
-        </div>
+        </fieldset>
 
-        <div class="col-auto">
+        <fieldset class="col-auto">
             <button type="submit"
                     class="btn btn-warning"
                     th:text="#{common.filter}">Filter
@@ -43,34 +43,34 @@
             <a class="btn btn-outline-dark"
                th:href="@{/legosets}"
                th:text="#{common.clear}">Clear</a>
-        </div>
+        </fieldset>
     </form>
 
-    <div class="alert alert-warning alert-dismissible fade show d-none d-lg-block"
-         role="note">
+    <aside class="alert alert-warning alert-dismissible fade show d-none d-lg-block"
+           role="note">
         <span th:text="#{legosets.largeHint}">Tip: LEGO sets with more than 5000 pieces have a yellow border.</span>
         <button type="button"
                 class="btn-close"
                 data-bs-dismiss="alert"
                 th:aria-label="#{common.close}">
         </button>
-    </div>
+    </aside>
 
     <p th:if="${#lists.isEmpty(legoSets)}"
        th:text="#{legosets.none}">No LEGO sets found.</p>
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4"
-         th:unless="${#lists.isEmpty(legoSets)}">
-        <div class="col"
-             th:each="set : ${legoSets}">
-            <div class="card h-100 shadow-sm"
-                 th:classappend="${set.pieceCount > 5000} ? 'border-warning border-3'">
-                <div class="ratio ratio-4x3">
+    <ul class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 list-unstyled"
+        th:unless="${#lists.isEmpty(legoSets)}">
+        <li class="col"
+            th:each="set : ${legoSets}">
+            <article class="card h-100 shadow-sm"
+                     th:classappend="${set.pieceCount > 5000} ? 'border-warning border-3'">
+                <figure class="ratio ratio-4x3 mb-0">
                     <img class="card-img-top object-fit-contain p-2"
                          th:src="${set.imageUrl}"
                          th:alt="${set.name}">
-                </div>
-                <div class="card-body">
+                </figure>
+                <section class="card-body">
                     <h2 class="card-title h5">
                         <a class="stretched-link text-reset text-decoration-none"
                            th:href="@{/legosets/{id}(id=${set.id})}"
@@ -78,7 +78,7 @@
                     </h2>
                     <p class="card-text"
                        th:text="#{legoset.pieceCount} + ': ' + ${set.pieceCount}">Pieces: 0</p>
-                    <div class="d-flex flex-wrap gap-1">
+                    <p class="d-flex flex-wrap gap-1 mb-0">
                         <th:block th:switch="${set.difficulty.name()}">
                             <span th:case="'EASY'"
                                   class="badge text-bg-success"
@@ -96,12 +96,12 @@
                         <span th:if="${set.retired}"
                               class="badge text-bg-secondary"
                               th:text="#{legoset.retired}">Retired</span>
-                    </div>
+                    </p>
 
-                </div>
-            </div>
-        </div>
-    </div>
+                </section>
+            </article>
+        </li>
+    </ul>
 
     <p th:unless="${#lists.isEmpty(legoSets)}"
        th:text="#{legosets.count(${#lists.size(legoSets)})}">10 LEGO sets</p>

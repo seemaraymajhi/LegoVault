@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<nav th:replace="~{fragments :: nav}"></nav>
+<header th:replace="~{fragments :: nav}"></header>
 
 <main class="container mt-4">
     <h1 th:text="#{addlegoset.heading}">Add a LEGO Set</h1>
@@ -22,7 +22,7 @@
           th:object="${legoSetForm}"
           method="post">
 
-        <div class="col-12">
+        <fieldset class="col-12">
             <label for="name"
                    class="form-label"
                    th:text="#{legoset.name}">Name</label>
@@ -32,9 +32,9 @@
                    type="text"
                    th:field="*{name}"
                    required>
-        </div>
+        </fieldset>
 
-        <div class="col-md-6">
+        <fieldset class="col-md-6">
             <label for="pieceCount"
                    class="form-label"
                    th:text="#{legoset.pieceCount}">Number of pieces</label>
@@ -46,14 +46,14 @@
                    step="1"
                    th:field="*{pieceCount}"
                    required>
-        </div>
+        </fieldset>
 
-        <div class="col-md-6">
+        <fieldset class="col-md-6">
             <label for="price"
                    class="form-label"
                    th:text="#{legoset.price}">Price (EUR)</label>
 
-            <div class="input-group">
+            <span class="input-group">
                 <span class="input-group-text">€</span>
 
                 <input id="price"
@@ -63,10 +63,10 @@
                        step="0.01"
                        th:field="*{price}"
                        required>
-            </div>
-        </div>
+            </span>
+        </fieldset>
 
-        <div class="col-md-6">
+        <fieldset class="col-md-6">
             <label for="releaseDate"
                    class="form-label"
                    th:text="#{legoset.releaseDate}">Release date</label>
@@ -76,9 +76,9 @@
                    type="date"
                    th:field="*{releaseDate}"
                    required>
-        </div>
+        </fieldset>
 
-        <div class="col-md-6">
+        <fieldset class="col-md-6">
             <label for="difficulty"
                    class="form-label"
                    th:text="#{legoset.difficulty}">Difficulty</label>
@@ -89,7 +89,8 @@
                     required>
 
                 <option value=""
-                        th:text="#{addlegoset.selectDifficulty}">-- Select a difficulty --</option>
+                        th:text="#{addlegoset.selectDifficulty}">-- Select a difficulty --
+                </option>
 
                 <option th:each="difficultyOption : ${difficulties}"
                         th:value="${difficultyOption}"
@@ -97,9 +98,9 @@
                     EASY
                 </option>
             </select>
-        </div>
+        </fieldset>
 
-        <div class="col-12">
+        <fieldset class="col-12">
             <label for="imageUrl"
                    class="form-label"
                    th:text="#{legoset.imageUrl}">Image URL</label>
@@ -109,9 +110,9 @@
                    type="url"
                    th:field="*{imageUrl}"
                    required>
-        </div>
+        </fieldset>
 
-        <div class="col-12">
+        <fieldset class="col-12">
             <label for="pieceName"
                    class="form-label"
                    th:text="#{legoset.piece}">Contains LEGO piece</label>
@@ -122,7 +123,8 @@
                     required>
 
                 <option value=""
-                        th:text="#{addlegoset.selectPiece}">-- Select a LEGO piece --</option>
+                        th:text="#{addlegoset.selectPiece}">-- Select a LEGO piece --
+                </option>
 
                 <option th:each="piece : ${legoPieces}"
                         th:value="${piece.name}"
@@ -130,10 +132,10 @@
                     2x4 Brick (Red)
                 </option>
             </select>
-        </div>
+        </fieldset>
 
-        <div class="col-12">
-            <div class="form-check">
+        <fieldset class="col-12">
+            <p class="form-check mb-0">
                 <input id="retired"
                        class="form-check-input"
                        type="checkbox"
@@ -142,18 +144,19 @@
                 <label for="retired"
                        class="form-check-label"
                        th:text="#{legoset.retired}">Retired</label>
-            </div>
-        </div>
+            </p>
+        </fieldset>
 
-        <div class="col-12">
+        <fieldset class="col-12">
             <button type="submit"
                     class="btn btn-warning"
-                    th:text="#{addlegoset.submit}">Add LEGO Set</button>
+                    th:text="#{addlegoset.submit}">Add LEGO Set
+            </button>
 
             <a class="btn btn-outline-dark"
                th:href="@{/legosets}"
                th:text="#{common.cancel}">Cancel</a>
-        </div>
+        </fieldset>
     </form>
 </main>
 <footer th:replace="~{fragments :: footer}"></footer>
