@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<nav th:replace="~{fragments :: nav}"></nav>
+<header th:replace="~{fragments :: nav}"></header>
 
 <main class="container mt-4">
     <h1 th:text="#{legopieces.heading}">LEGO Pieces</h1>
@@ -20,7 +20,7 @@
     <form class="row g-2 align-items-end mb-4"
           th:action="@{/legopieces/search}"
           method="get">
-        <div class="col-sm-6 col-md-4">
+        <fieldset class="col-sm-6 col-md-4">
             <label for="name"
                    class="form-label"
                    th:text="#{legopieces.nameContains}">Name contains</label>
@@ -30,9 +30,9 @@
                    type="search"
                    name="name"
                    th:value="${name}">
-        </div>
+        </fieldset>
 
-        <div class="col-sm-6 col-md-4">
+        <fieldset class="col-sm-6 col-md-4">
             <label for="material"
                    class="form-label"
                    th:text="#{legopiece.material}">Material</label>
@@ -51,9 +51,9 @@
                     PLASTIC
                 </option>
             </select>
-        </div>
+        </fieldset>
 
-        <div class="col-auto">
+        <fieldset class="col-auto">
             <button type="submit"
                     class="btn btn-warning"
                     th:text="#{common.filter}">Filter
@@ -61,7 +61,7 @@
             <a class="btn btn-outline-dark"
                th:href="@{/legopieces}"
                th:text="#{common.clear}">Clear</a>
-        </div>
+        </fieldset>
     </form>
 
     <p th:if="${#lists.isEmpty(legoPieces)}"

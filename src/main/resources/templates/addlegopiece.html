@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<nav th:replace="~{fragments :: nav}"></nav>
+<header th:replace="~{fragments :: nav}"></header>
 
 <main class="container mt-4">
     <h1 th:text="#{addlegopiece.heading}">Add a LEGO Piece</h1>
@@ -21,7 +21,7 @@
           th:object="${legoPieceForm}"
           method="post">
 
-        <div class="col-md-6">
+        <fieldset class="col-md-6">
             <label for="name"
                    class="form-label"
                    th:text="#{legopiece.name}">Name</label>
@@ -31,9 +31,9 @@
                    type="text"
                    th:field="*{name}"
                    required>
-        </div>
+        </fieldset>
 
-        <div class="col-md-6">
+        <fieldset class="col-md-6">
             <label for="color"
                    class="form-label"
                    th:text="#{legopiece.color}">Color</label>
@@ -43,9 +43,9 @@
                    type="text"
                    th:field="*{color}"
                    required>
-        </div>
+        </fieldset>
 
-        <div class="col-12">
+        <fieldset class="col-12">
             <label for="material"
                    class="form-label"
                    th:text="#{legopiece.material}">Material</label>
@@ -56,7 +56,8 @@
                     required>
 
                 <option value=""
-                        th:text="#{addlegopiece.selectMaterial}">-- Select a material --</option>
+                        th:text="#{addlegopiece.selectMaterial}">-- Select a material --
+                </option>
 
                 <option th:each="m : ${materials}"
                         th:value="${m}"
@@ -64,12 +65,13 @@
                     PLASTIC
                 </option>
             </select>
-        </div>
-        <div class="col-12">
+        </fieldset>
+        <fieldset class="col-12">
             <button type="submit"
                     class="btn btn-warning"
-                    th:text="#{addlegopiece.submit}">Add LEGO Piece</button>
-        </div>
+                    th:text="#{addlegopiece.submit}">Add LEGO Piece
+            </button>
+        </fieldset>
     </form>
 </main>
 <footer th:replace="~{fragments :: footer}"></footer>
