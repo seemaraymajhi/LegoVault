@@ -94,7 +94,7 @@
 
                 <option th:each="difficultyOption : ${difficulties}"
                         th:value="${difficultyOption}"
-                        th:text="${difficultyOption}">
+                        th:text="#{${'difficulty.' + difficultyOption}}">
                     EASY
                 </option>
             </select>

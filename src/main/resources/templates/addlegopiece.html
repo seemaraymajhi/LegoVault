@@ -61,7 +61,7 @@
 
                 <option th:each="m : ${materials}"
                         th:value="${m}"
-                        th:text="${m}">
+                        th:text="#{${'material.' + m}}">
                     PLASTIC
                 </option>
             </select>
