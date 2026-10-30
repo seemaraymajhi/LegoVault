@@ -82,16 +82,16 @@
                         <th:block th:switch="${set.difficulty.name()}">
                             <span th:case="'EASY'"
                                   class="badge text-bg-success"
-                                  th:text="${set.difficulty}">EASY</span>
+                                  th:text="#{difficulty.EASY}">EASY</span>
                             <span th:case="'MEDIUM'"
                                   class="badge text-bg-info"
-                                  th:text="${set.difficulty}">MEDIUM</span>
+                                  th:text="#{difficulty.MEDIUM}">MEDIUM</span>
                             <span th:case="'HARD'"
                                   class="badge text-bg-warning"
-                                  th:text="${set.difficulty}">HARD</span>
+                                  th:text="#{difficulty.HARD}">HARD</span>
                             <span th:case="*"
                                   class="badge text-bg-dark"
-                                  th:text="${set.difficulty}">EXPERT</span>
+                                  th:text="#{difficulty.EXPERT}">EXPERT</span>
                         </th:block>
                         <span th:if="${set.retired}"
                               class="badge text-bg-secondary"

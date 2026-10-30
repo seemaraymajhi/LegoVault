@@ -46,7 +46,7 @@
 
                 <option th:each="m : ${materials}"
                         th:value="${m}"
-                        th:text="${m}"
+                        th:text="#{${'material.' + m}}"
                         th:selected="${material == m.name()}">
                     PLASTIC
                 </option>
@@ -81,7 +81,7 @@
         <tr th:each="piece : ${legoPieces}">
             <td th:text="${piece.name}">Name</td>
             <td th:text="${piece.color}">Color</td>
-            <td th:text="${piece.material}">PLASTIC</td>
+            <td th:text="#{${'material.' + piece.material}}">PLASTIC</td>
         </tr>
         </tbody>
     </table>
