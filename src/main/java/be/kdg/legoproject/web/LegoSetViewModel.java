@@ -15,8 +15,8 @@ public class LegoSetViewModel {
             LoggerFactory.getLogger(LegoSetViewModel.class);
 
     private String name;
-    private int pieceCount;
-    private double price;
+    private Integer pieceCount;
+    private Double price;
 
     // The date picker sends text like "2021-11-01"; this tells Spring how to read it.
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -41,19 +41,19 @@ public class LegoSetViewModel {
         this.name = name;
     }
 
-    public int getPieceCount() {
+    public Integer getPieceCount() {
         return pieceCount;
     }
 
-    public void setPieceCount(int pieceCount) {
+    public void setPieceCount(Integer pieceCount) {
         this.pieceCount = pieceCount;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
