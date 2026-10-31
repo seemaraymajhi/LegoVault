@@ -3,6 +3,7 @@ package be.kdg.legoproject.web;
 import be.kdg.legoproject.domain.Material;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import jakarta.validation.constraints.*;
 
 // Holds what the user typed in the "Add LEGO Piece" form.
 // Spring creates it with the empty constructor and fills it using the setters.
@@ -11,8 +12,14 @@ public class LegoPieceViewModel {
     private static final Logger log =
             LoggerFactory.getLogger(LegoPieceViewModel.class);
 
+    @NotBlank(message = "{legopiece.name.notBlank}")
+    @Size(max = 50, message = "{legopiece.name.size}")
     private String name;
+
+    @NotBlank(message = "{legopiece.color.notBlank}")
     private String color;
+
+    @NotNull(message = "{legopiece.material.notNull}")
     private Material material;
 
     public LegoPieceViewModel() {
