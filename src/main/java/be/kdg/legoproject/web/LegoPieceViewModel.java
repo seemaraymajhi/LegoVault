@@ -6,17 +6,17 @@ import org.slf4j.LoggerFactory;
 
 // Holds what the user typed in the "Add LEGO Piece" form.
 // Spring creates it with the empty constructor and fills it using the setters.
-public class LegoPieceForm {
+public class LegoPieceViewModel {
 
     private static final Logger log =
-            LoggerFactory.getLogger(LegoPieceForm.class);
+            LoggerFactory.getLogger(LegoPieceViewModel.class);
 
     private String name;
     private String color;
     private Material material;
 
-    public LegoPieceForm() {
-        log.debug("Created a LegoPieceForm backing object");
+    public LegoPieceViewModel() {
+        log.debug("Created a LegoPieceViewModel backing object");
     }
 
     public String getName() {

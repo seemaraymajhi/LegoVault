@@ -9,14 +9,14 @@ import java.time.LocalDate;
 
 // Holds what the user typed in the "Add LEGO Set" form.
 // Spring creates it with the empty constructor and fills it using the setters.
-public class LegoSetForm {
+public class LegoSetViewModel {
 
     private static final Logger log =
-            LoggerFactory.getLogger(LegoSetForm.class);
+            LoggerFactory.getLogger(LegoSetViewModel.class);
 
     private String name;
-    private int pieceCount;
-    private double price;
+    private Integer pieceCount;
+    private Double price;
 
     // The date picker sends text like "2021-11-01"; this tells Spring how to read it.
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -29,8 +29,8 @@ public class LegoSetForm {
     // The name of the chosen LEGO piece (for the many-to-many link).
     private String pieceName;
 
-    public LegoSetForm() {
-        log.debug("Created a LegoSetForm backing object");
+    public LegoSetViewModel() {
+        log.debug("Created a LegoSetViewModel backing object");
     }
 
     public String getName() {
@@ -41,19 +41,19 @@ public class LegoSetForm {
         this.name = name;
     }
 
-    public int getPieceCount() {
+    public Integer getPieceCount() {
         return pieceCount;
     }
 
-    public void setPieceCount(int pieceCount) {
+    public void setPieceCount(Integer pieceCount) {
         this.pieceCount = pieceCount;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
