@@ -55,6 +55,31 @@
                            aria-hidden="true"></i>
                         <span th:text="#{nav.addlegopiece}">Add LEGO Piece</span> </a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"
+                       href="#"
+                       role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        <i class="bi bi-translate me-1"
+                           aria-hidden="true"></i>
+                        <span th:text="#{nav.language}">Language</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item"
+                               th:href="@{''(lang='en')}"
+                               th:classappend="${#locale.language == 'en'} ? 'active'"
+                               th:text="#{lang.en}">English</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                               th:href="@{''(lang='nl')}"
+                               th:classappend="${#locale.language == 'nl'} ? 'active'"
+                               th:text="#{lang.nl}">Nederlands</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </section>
     </nav>
