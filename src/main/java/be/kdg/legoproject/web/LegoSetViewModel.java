@@ -9,10 +9,10 @@ import java.time.LocalDate;
 
 // Holds what the user typed in the "Add LEGO Set" form.
 // Spring creates it with the empty constructor and fills it using the setters.
-public class LegoSetForm {
+public class LegoSetViewModel {
 
     private static final Logger log =
-            LoggerFactory.getLogger(LegoSetForm.class);
+            LoggerFactory.getLogger(LegoSetViewModel.class);
 
     private String name;
     private int pieceCount;
@@ -29,8 +29,8 @@ public class LegoSetForm {
     // The name of the chosen LEGO piece (for the many-to-many link).
     private String pieceName;
 
-    public LegoSetForm() {
-        log.debug("Created a LegoSetForm backing object");
+    public LegoSetViewModel() {
+        log.debug("Created a LegoSetViewModel backing object");
     }
 
     public String getName() {

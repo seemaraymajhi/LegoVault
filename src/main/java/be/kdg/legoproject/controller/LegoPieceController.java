@@ -3,7 +3,7 @@ package be.kdg.legoproject.controller;
 import be.kdg.legoproject.domain.LegoPiece;
 import be.kdg.legoproject.domain.Material;
 import be.kdg.legoproject.service.LegoPieceService;
-import be.kdg.legoproject.web.LegoPieceForm;
+import be.kdg.legoproject.web.LegoPieceViewModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -56,14 +56,14 @@ public class LegoPieceController {
     @GetMapping("/add")
     public String showAddLegoPieceForm(Model model) {
         log.debug("GET /legopieces/add called");
-        model.addAttribute("legoPieceForm", new LegoPieceForm());
+        model.addAttribute("legoPieceForm", new LegoPieceViewModel());
         return "addlegopiece";
     }
 
     // POST /legopieces/add - save the new piece, then redirect (PRG).
     @PostMapping("/add")
     public String processAddLegoPiece(
-            @ModelAttribute("legoPieceForm") LegoPieceForm form
+            @ModelAttribute("legoPieceForm") LegoPieceViewModel form
     ) {
         log.debug("POST /legopieces/add called with name='{}', color='{}', material={}",
                 form.getName(), form.getColor(), form.getMaterial());

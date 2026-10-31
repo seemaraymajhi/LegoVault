@@ -5,7 +5,7 @@ import be.kdg.legoproject.domain.LegoPiece;
 import be.kdg.legoproject.domain.LegoSet;
 import be.kdg.legoproject.service.LegoPieceService;
 import be.kdg.legoproject.service.LegoSetService;
-import be.kdg.legoproject.web.LegoSetForm;
+import be.kdg.legoproject.web.LegoSetViewModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -111,7 +111,7 @@ public class LegoSetController {
 
         model.addAttribute(
                 "legoSetForm",
-                new LegoSetForm()
+                new LegoSetViewModel()
         );
 
         return "addlegoset";
@@ -120,30 +120,30 @@ public class LegoSetController {
     // POST /legosets/add - save the set, link the chosen piece, then redirect (PRG)
     @PostMapping("/add")
     public String processAddLegoSet(
-            @ModelAttribute("legoSetForm") LegoSetForm legoSetForm
+            @ModelAttribute("legoSetForm") LegoSetViewModel legoSetViewModel
     ) {
         log.debug(
                 "POST /legosets/add called with name='{}', pieceName='{}'",
-                legoSetForm.getName(),
-                legoSetForm.getPieceName()
+                legoSetViewModel.getName(),
+                legoSetViewModel.getPieceName()
         );
 
         // Convert the form (user input) into a real domain object.
         LegoSet legoSet = new LegoSet(
-                legoSetForm.getName(),
-                legoSetForm.getPieceCount(),
-                legoSetForm.getPrice(),
-                legoSetForm.getReleaseDate(),
-                legoSetForm.getDifficulty(),
-                legoSetForm.isRetired(),
-                legoSetForm.getImageUrl()
+                legoSetViewModel.getName(),
+                legoSetViewModel.getPieceCount(),
+                legoSetViewModel.getPrice(),
+                legoSetViewModel.getReleaseDate(),
+                legoSetViewModel.getDifficulty(),
+                legoSetViewModel.isRetired(),
+                legoSetViewModel.getImageUrl()
         );
 
-        legoSetService.addLegoSet(legoSet, legoSetForm.getPieceName());
+        legoSetService.addLegoSet(legoSet, legoSetViewModel.getPieceName());
 
         log.info(
                 "LEGO set '{}' added successfully; redirecting to /legosets",
-                legoSetForm.getName()
+                legoSetViewModel.getName()
         );
 
         return "redirect:/legosets";
