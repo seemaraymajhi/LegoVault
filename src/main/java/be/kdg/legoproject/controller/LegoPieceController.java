@@ -3,6 +3,7 @@ package be.kdg.legoproject.controller;
 import be.kdg.legoproject.domain.LegoPiece;
 import be.kdg.legoproject.domain.Material;
 import be.kdg.legoproject.service.LegoPieceService;
+import be.kdg.legoproject.session.SessionHistory;
 import be.kdg.legoproject.web.LegoPieceViewModel;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -20,9 +21,14 @@ public class LegoPieceController {
             LoggerFactory.getLogger(LegoPieceController.class);
 
     private final LegoPieceService legoPieceService;
+    private final SessionHistory sessionHistory;
 
-    public LegoPieceController(LegoPieceService legoPieceService) {
+    public LegoPieceController(
+            LegoPieceService legoPieceService,
+            SessionHistory sessionHistory
+    ) {
         this.legoPieceService = legoPieceService;
+        this.sessionHistory = sessionHistory;
     }
 
     // Makes the material values available before every controller request.
@@ -35,6 +41,7 @@ public class LegoPieceController {
     @GetMapping
     public String showLegoPieces(Model model) {
         log.debug("GET /legopieces called");
+        sessionHistory.addVisit("/legopieces");
         return renderLegoPieces("", "", model);
     }
 
@@ -47,6 +54,7 @@ public class LegoPieceController {
     ) {
         log.debug("GET /legopieces/search called with name='{}', material='{}'",
                 name, material);
+        sessionHistory.addVisit("/legopieces/search");
         return renderLegoPieces(name, material, model);
     }
 
@@ -54,6 +62,7 @@ public class LegoPieceController {
     @GetMapping("/add")
     public String showAddLegoPieceForm(Model model) {
         log.debug("GET /legopieces/add called");
+        sessionHistory.addVisit("/legopieces/add");
         model.addAttribute("legoPieceForm", new LegoPieceViewModel()
         );
         return "addlegopiece";
