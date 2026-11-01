@@ -4,15 +4,13 @@ import be.kdg.legoproject.domain.LegoPiece;
 import be.kdg.legoproject.domain.Material;
 import be.kdg.legoproject.service.LegoPieceService;
 import be.kdg.legoproject.web.LegoPieceViewModel;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/legopieces")
@@ -56,17 +54,28 @@ public class LegoPieceController {
     @GetMapping("/add")
     public String showAddLegoPieceForm(Model model) {
         log.debug("GET /legopieces/add called");
-        model.addAttribute("legoPieceForm", new LegoPieceViewModel());
+        model.addAttribute("legoPieceForm", new LegoPieceViewModel()
+        );
         return "addlegopiece";
     }
 
     // POST /legopieces/add - save the new piece, then redirect (PRG).
     @PostMapping("/add")
     public String processAddLegoPiece(
-            @ModelAttribute("legoPieceForm") LegoPieceViewModel form
+            @Valid
+            @ModelAttribute("legoPieceForm") LegoPieceViewModel form,
+            BindingResult errors
+
     ) {
+        if (errors.hasErrors()) {
+            errors.getAllErrors()
+                    .forEach(error -> log.warn("Validation error: {}", error)
+                    );
+            return "addlegopiece";
+        }
         log.debug("POST /legopieces/add called with name='{}', color='{}', material={}",
-                form.getName(), form.getColor(), form.getMaterial());
+                form.getName(), form.getColor(), form.getMaterial()
+        );
 
         LegoPiece legoPiece = new LegoPiece(
                 form.getName(),
@@ -75,7 +84,8 @@ public class LegoPieceController {
         );
         legoPieceService.addLegoPiece(legoPiece);
 
-        log.info("LEGO piece '{}' added, redirecting to /legopieces", form.getName());
+        log.info("LEGO piece '{}' added, redirecting to /legopieces", form.getName()
+        );
         return "redirect:/legopieces";
     }
 
@@ -84,7 +94,8 @@ public class LegoPieceController {
         log.debug("Showing LEGO pieces with name substring '{}' and material '{}'",
                 name, material);
 
-        model.addAttribute("legoPieces", legoPieceService.searchLegoPieces(name, material));
+        model.addAttribute("legoPieces", legoPieceService.searchLegoPieces(name, material)
+        );
         model.addAttribute("name", name);
         model.addAttribute("material", material);
 
