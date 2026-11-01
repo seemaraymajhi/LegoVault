@@ -1,9 +1,11 @@
 package be.kdg.legoproject.config;
 
+import be.kdg.legoproject.converter.StringToDifficultyConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -32,5 +34,13 @@ public class WebConfig implements WebMvcConfigurer {
         interceptor.setParamName("lang");
         registry.addInterceptor(interceptor);
         log.debug("Registered LocaleChangeInterceptor with parameter 'lang'");
+    }
+
+    // Registers the custom converter for form fields of type Difficulty.
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(new StringToDifficultyConverter()
+        );
+        log.debug("Registered StringToDifficultyConverter");
     }
 }
