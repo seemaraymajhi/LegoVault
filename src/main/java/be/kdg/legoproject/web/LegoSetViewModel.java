@@ -1,6 +1,7 @@
 package be.kdg.legoproject.web;
 
 import be.kdg.legoproject.domain.Difficulty;
+import jakarta.validation.constraints.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,19 +15,35 @@ public class LegoSetViewModel {
     private static final Logger log =
             LoggerFactory.getLogger(LegoSetViewModel.class);
 
+    @NotBlank(message = "{legoset.name.notBlank}")
+    @Size(max = 100, message = "{legoset.name.size}")
     private String name;
+
+    @NotNull(message = "{legoset.pieceCount.notNull}")
+    @Positive(message = "{legoset.pieceCount.positive}")
+    @Max(value = 20000, message = "{legoset.pieceCount.max}")
     private Integer pieceCount;
+
+    @NotNull(message = "{legoset.price.notNull}")
+    @Positive(message = "{legoset.price.positive}")
     private Double price;
 
     // The date picker sends text like "2021-11-01"; this tells Spring how to read it.
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @NotNull(message = "{legoset.releaseDate.notNull}")
+    @PastOrPresent(message = "{legoset.releaseDate.pastOrPresent}")
     private LocalDate releaseDate;
 
+    @NotNull(message = "{legoset.difficulty.notNull}")
     private Difficulty difficulty;
     private boolean retired;
+
+    @NotBlank(message = "{legoset.imageUrl.notBlank}")
+    @Pattern(regexp = "https?://.+", message = "{legoset.imageUrl.pattern}")
     private String imageUrl;
 
     // The name of the chosen LEGO piece (for the many-to-many link).
+    @NotBlank(message = "{legoset.pieceName.notBlank}")
     private String pieceName;
 
     public LegoSetViewModel() {
