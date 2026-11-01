@@ -63,22 +63,33 @@
         th:unless="${#lists.isEmpty(legoSets)}">
         <li class="col"
             th:each="set : ${legoSets}">
-            <article class="card h-100 shadow-sm"
+            <article class="card h-100 shadow-sm rounded-4"
                      th:classappend="${set.pieceCount > 5000} ? 'border-warning border-3'">
+                <span th:if="${set.retired}"
+                      class="badge text-bg-secondary position-absolute top-0 end-0 m-2"
+                      th:text="#{legoset.retired}">Retired</span>
                 <figure class="ratio ratio-4x3 mb-0">
-                    <img class="card-img-top object-fit-contain p-2"
+                    <img class="card-img-top object-fit-contain p-3"
                          th:src="${set.imageUrl}"
                          th:alt="${set.name}">
                 </figure>
-                <section class="card-body">
-                    <h2 class="card-title h5">
-                        <a class="stretched-link text-reset text-decoration-none"
-                           th:href="@{/legosets/{id}(id=${set.id})}"
-                           th:text="${set.name}">Name</a>
-                    </h2>
-                    <p class="card-text"
-                       th:text="#{legoset.pieceCount} + ': ' + ${set.pieceCount}">Pieces: 0</p>
-                    <p class="d-flex flex-wrap gap-1 mb-0">
+                <section class="card-body d-flex flex-column">
+                    <p class="d-flex gap-3 small text-body-secondary mb-2">
+                        <span th:if="${set.theme != null}">
+                            <i class="bi bi-cake2 me-1" aria-hidden="true"></i>
+                            <span class="visually-hidden" th:text="#{theme.ageRange}">Age range</span>
+                            <span th:text="${set.theme.ageRange}">9+</span>
+                        </span>
+                        <span>
+                            <i class="bi bi-bricks me-1" aria-hidden="true"></i>
+                            <span class="visually-hidden" th:text="#{legoset.pieceCount}">Pieces</span>
+                            <span th:text="${set.pieceCount}">7541</span>
+                        </span>
+                    </p>
+                    <h2 class="card-title h5" th:text="${set.name}">Name</h2>
+                    <p class="fs-5 fw-bold mb-2"
+                       th:text="'€ ' + ${#numbers.formatDecimal(set.price, 1, 2)}">€ 849,99</p>
+                    <p class="d-flex flex-wrap gap-1 mb-3">
                         <th:block th:switch="${set.difficulty.name()}">
                             <span th:case="'EASY'"
                                   class="badge text-bg-success"
@@ -93,11 +104,12 @@
                                   class="badge text-bg-dark"
                                   th:text="#{difficulty.EXPERT}">EXPERT</span>
                         </th:block>
-                        <span th:if="${set.retired}"
-                              class="badge text-bg-secondary"
-                              th:text="#{legoset.retired}">Retired</span>
                     </p>
-
+                    <a class="btn btn-warning rounded-pill fw-semibold stretched-link mt-auto"
+                       th:href="@{/legosets/{id}(id=${set.id})}">
+                        <i class="bi bi-eye me-1" aria-hidden="true"></i>
+                        <span th:text="#{legosets.viewDetails}">View details</span>
+                    </a>
                 </section>
             </article>
         </li>
