@@ -5,6 +5,7 @@ import be.kdg.legoproject.domain.LegoPiece;
 import be.kdg.legoproject.domain.LegoSet;
 import be.kdg.legoproject.service.LegoPieceService;
 import be.kdg.legoproject.service.LegoSetService;
+import be.kdg.legoproject.session.SessionHistory;
 import be.kdg.legoproject.web.LegoSetViewModel;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -28,12 +29,17 @@ public class LegoSetController {
     private final LegoSetService legoSetService;
     private final LegoPieceService legoPieceService;
 
+    private final SessionHistory sessionHistory;
+
     public LegoSetController(
             LegoSetService legoSetService,
-            LegoPieceService legoPieceService
+            LegoPieceService legoPieceService,
+            SessionHistory sessionHistory
     ) {
         this.legoSetService = legoSetService;
         this.legoPieceService = legoPieceService;
+        this.sessionHistory = sessionHistory;
+
     }
 
     // Dropdown values for the add form, available before every request.
@@ -52,6 +58,7 @@ public class LegoSetController {
     @GetMapping
     public String showLegoSets(Model model) {
         log.debug("GET /legosets called");
+        sessionHistory.addVisit("/legosets");
 
         model.addAttribute(
                 "legoSets",
@@ -71,6 +78,7 @@ public class LegoSetController {
                 "GET /legosets/search called with minPieces={}",
                 minPieces
         );
+        sessionHistory.addVisit("/legosets/search?minPieces=" + minPieces);
 
         model.addAttribute(
                 "legoSets",
@@ -91,9 +99,11 @@ public class LegoSetController {
                 "GET /legosets/{} called",
                 id
         );
+        sessionHistory.addVisit("/legosets/" + id);
 
         Optional<LegoSet> legoSet = legoSetService.getLegoSetById(id);
-        if (legoSet.isEmpty()) {
+        if (legoSet.isEmpty()
+        ) {
             log.warn("LEGO set with id {} not found; redirecting to /legosets",
                     id
             );
@@ -110,6 +120,7 @@ public class LegoSetController {
     @GetMapping("/add")
     public String showAddLegoSetForm(Model model) {
         log.debug("GET /legosets/add called");
+        sessionHistory.addVisit("/legosets/add");
 
         model.addAttribute(
                 "legoSetForm",
@@ -127,7 +138,8 @@ public class LegoSetController {
     ) {
         if (errors.hasErrors()) {
             errors.getAllErrors()
-                    .forEach(error -> log.warn("Validation error: {}", error));
+                    .forEach(error -> log.warn("Validation error: {}", error)
+                    );
             return "addlegoset";
         }
         log.debug(
@@ -147,7 +159,8 @@ public class LegoSetController {
                 legoSetViewModel.getImageUrl()
         );
 
-        legoSetService.addLegoSet(legoSet, legoSetViewModel.getPieceName());
+        legoSetService.addLegoSet(legoSet, legoSetViewModel.getPieceName()
+        );
 
         log.info(
                 "LEGO set '{}' added successfully; redirecting to /legosets",
