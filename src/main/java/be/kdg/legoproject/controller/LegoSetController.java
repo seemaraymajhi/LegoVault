@@ -6,10 +6,12 @@ import be.kdg.legoproject.domain.LegoSet;
 import be.kdg.legoproject.service.LegoPieceService;
 import be.kdg.legoproject.service.LegoSetService;
 import be.kdg.legoproject.web.LegoSetViewModel;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -120,8 +122,14 @@ public class LegoSetController {
     // POST /legosets/add - save the set, link the chosen piece, then redirect (PRG)
     @PostMapping("/add")
     public String processAddLegoSet(
-            @ModelAttribute("legoSetForm") LegoSetViewModel legoSetViewModel
+            @Valid @ModelAttribute("legoSetForm") LegoSetViewModel legoSetViewModel,
+            BindingResult errors
     ) {
+        if (errors.hasErrors()) {
+            errors.getAllErrors()
+                    .forEach(error -> log.warn("Validation error: {}", error));
+            return "addlegoset";
+        }
         log.debug(
                 "POST /legosets/add called with name='{}', pieceName='{}'",
                 legoSetViewModel.getName(),
