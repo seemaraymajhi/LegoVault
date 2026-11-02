@@ -6,3 +6,8 @@
 .card:hover {
     transform: translateY(-4px);
 }
+
+/* Soft peach page background, inspired by the LEGO shop. Bootstrap has no utility for this colour. */
+body {
+    background-color: #f9dfcc;
+}
