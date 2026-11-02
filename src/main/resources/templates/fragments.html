@@ -2,17 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<header th:fragment="nav"
+<header th:fragment="nav(activePage)"
         class="navbar navbar-expand-lg bg-warning border-bottom border-dark border-3 shadow-sm"
         data-bs-theme="light">
     <nav class="container"
          aria-label="Main navigation">
-        <a class="navbar-brand fw-bold"
+        <a class="navbar-brand"
            th:href="@{/legosets}">
-            <i class="bi bi-bricks me-1"
-               aria-hidden="true"></i>
-            <span th:text="#{nav.brand}">LegoVault</span>
+            <span class="d-inline-flex align-items-center gap-2
+            bg-danger text-white border border-2 border-white rounded-3 px-3 py-1 fw-bold shadow-sm">
+                <i class="bi bi-bricks me-1"
+                   aria-hidden="true"></i>
+                <span th:text="#{nav.brand}">LegoVault</span>
+            </span>
         </a>
+
         <button class="navbar-toggler"
                 type="button"
                 data-bs-toggle="collapse"
@@ -27,7 +31,9 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="nav-link"
-                       th:href="@{/legosets}">
+                       th:href="@{/legosets}"
+                       th:classappend="${activePage == 'legosets'} ? 'active bg-danger text-white rounded-pill px-3'"
+                       th:aria-current="${activePage == 'legosets'} ? 'page'">
                         <i class="bi bi-grid-3x3-gap me-1"
                            aria-hidden="true"></i>
                         <span th:text="#{nav.legosets}">LEGO Sets</span>
@@ -35,7 +41,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
-                       th:href="@{/legopieces}">
+                       th:href="@{/legopieces}"
+                       th:classappend="${activePage == 'legopieces'} ? 'active bg-danger text-white rounded-pill px-3'"
+                       th:aria-current="${activePage == 'legopieces'} ? 'page'">
                         <i class="bi bi-puzzle me-1"
                            aria-hidden="true"></i>
                         <span th:text="#{nav.legopieces}">LEGO Pieces</span>
@@ -43,21 +51,27 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
-                       th:href="@{/legosets/add}">
+                       th:href="@{/legosets/add}"
+                       th:classappend="${activePage == 'addlegoset'} ? 'active bg-danger text-white rounded-pill px-3'"
+                       th:aria-current="${activePage == 'addlegoset'} ? 'page'">
                         <i class="bi bi-plus-circle me-1"
                            aria-hidden="true"></i>
                         <span th:text="#{nav.addlegoset}">Add LEGO Set</span> </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
-                       th:href="@{/legopieces/add}">
+                       th:href="@{/legopieces/add}"
+                       th:classappend="${activePage == 'addlegopiece'} ? 'active bg-danger text-white rounded-pill px-3'"
+                       th:aria-current="${activePage == 'addlegopiece'} ? 'page'">
                         <i class="bi bi-plus-square me-1"
                            aria-hidden="true"></i>
                         <span th:text="#{nav.addlegopiece}">Add LEGO Piece</span> </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
-                       th:href="@{/history}">
+                       th:href="@{/history}"
+                       th:classappend="${activePage == 'history'} ? 'active bg-danger text-white rounded-pill px-3'"
+                       th:aria-current="${activePage == 'history'} ? 'page'">
                         <i class="bi bi-clock-history me-1"
                            aria-hidden="true"></i>
                         <span th:text="#{nav.history}">History</span>
